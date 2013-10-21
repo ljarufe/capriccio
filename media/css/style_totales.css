@@ -1,0 +1,52 @@
+body {
+	
+}
+#herramientas a, label{
+	margin-left:4px;
+}
+
+.totales{
+	height:auto;
+	width:100%;
+}
+	 .contenedor{
+	 	background-color:#f7f7f7;
+		width:100%;
+		height:25px;
+		border-bottom:1px solid #ffffff;
+		position:relative;
+	 }
+	 .contenedor:hover{
+	 	background-color:#e5e5e5;
+	 }
+	 .contenedor div{
+		float:left;
+		width:24.9%;
+		/*height:25px;*/
+		position:relative;
+		border-right:1px solid #ffffff;
+		font-size:10.5px;
+		max-width:23.9%;
+		margin:2px 0 0 2px;
+	}
+	#totales_tienda{
+		height:100%;
+		width:600px;
+		position:relative;
+		background-color:#add8e6;
+		border:2px solid #B0550E;
+		margin:0 auto;
+	}
+	#totales_tienda .ciudad,#totales_tienda .total,#totales_tienda .total_usd{
+		position:relative;
+		width:300px;
+		float:left;
+	} 
+		#totales_tienda .ciudad div,#totales_tienda .total div,#totales_tienda .total_usd div{
+			margin:2.5px;
+			background-color:#ffffff;
+			border:1px solid #B0550E; 
+			text-align:center;
+			text-transform:capitalize;
+			font-weight:bold;
+		}

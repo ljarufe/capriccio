@@ -1,0 +1,18 @@
+{% extends "base.html"%}
+
+{{ user.is_superuser }}
+{{ notice }}
+{% block body %}
+{% if compra %}
+	<div><label>Nombre : </label>{{ compra.cliente }}</div>
+	<div><label>Total : </label>{{ compra.total }}</div>
+	<div><label>Fecha Pedido : </label>{{ compra.fecha_pedido }}</div>
+	<div><label>Fecha Entrega : </label>{{ compra.fecha_entrega }}</div>
+	<div><label>Direcci&oacute;n Entrega : </label>{{ compra.direccion_entrega }}</div>
+{% endif %}
+{% if prod %}
+	<div><label>Producto : </label>{{ prod }}</div>
+	<div><label>Cantidad : </label>{{ prod.cantidad }}</div> 
+	<div><label>Imagen Producto : </label>{{ prod.producto.img_producto|safe }}</div> 
+{% endif %}
+{% endblock %}

@@ -1,0 +1,5 @@
+{% for tienda in tiendas %}
+	<li>
+		<a href="{% url detalle_tienda tienda.id %}" title='{{ tienda.direccion }}'>{{ tienda.nombre_corto|capfirst }}</a>
+	</li>
+{% endfor %}

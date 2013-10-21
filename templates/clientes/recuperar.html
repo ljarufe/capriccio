@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+
+{% block head %}
+
+	<link rel="stylesheet" type="text/css" href="/media/css/recuperar.css" media="screen" />
+		
+{% endblock %}
+
+{% block body %}
+	<div id="cont_izq"></div>
+	<div id="cont_der">
+	<form method="post" action="" id="form_rec">
+		<h2>Ingresa tus datos</h2>
+		<p>Recibirás un e-mail con tu nueva contraseña que se activará 
+		al confirmar el mismo.<br/>Ingresa el E-mail, Dni y Tel&eacute;fono con el que te registraste la primera vez.</p>
+		<ul>
+			{% if datos_incorrectos %}
+				<div class="notificacion">
+					Los datos ingresados no coinciden.
+				</div>
+			{% endif %}
+			<li><div class="nombre_opc">E-mail:</div><input type="text" name="email"></li>
+			<li><div class="nombre_opc">Dni: </div><input type="text" name="dni"></li>
+			<li><div class="nombre_opc">Tel&eacute;fono: </div><input type="text" name="telefono"><div class="clear"></div></li>
+			<li><input type="submit" value="Recibir"/></li>
+		</ul>
+	</form>
+	</div>
+{% endblock %}

@@ -1,0 +1,77 @@
+#form-container {
+	margin-left: 60px;
+	margin-top: 40px;
+	color: #7f7f7f;
+}
+	#form-container #lista-compra {
+		width: 500px;
+		padding-top: 20px;
+		padding-bottom: 15px;
+		border-right: 1px solid #bfbfbf;
+		float: left;
+	}		
+		#form-container #lista-compra ul {
+			margin-bottom: 20px;
+			margin-left: 10px;
+			width: 430px;
+		}
+			#form-container #lista-compra ul li{
+				list-style: none;
+				font-size: 0.9em;				
+			}
+				#form-container #lista-compra ul li ul {
+					padding-left: 15px;
+					border-bottom: 1px solid #bfbfbf;
+					border-left: 1px solid #bfbfbf;
+					-moz-border-radius-bottomleft: 7px; 
+				}
+					#form-container #lista-compra ul li ul li{
+						padding-top: 10px;
+						padding-bottom: 10px;
+						border-bottom: 1px solid #bfbfbf;
+					}
+	#form-container #general-compra {
+		float: left;	 
+		padding-bottom: 15px;
+		padding-top: 20px;
+		padding-left: 10px;
+	}
+		#form-container #general-compra p {
+			margin-bottom: 10px;
+			font-size: 0.9em;
+		}
+		#form-container #general-compra input, 
+		#form-container #general-compra button, 
+		#form-container #general-compra .cancel {
+			width: 35px;
+			padding: 5px;
+			border: 1px solid #bfbfbf;
+			background-color: #e5e5e5;
+			color: #4d4d4d;	
+			text-decoration: none;
+			font-size: 0.8em;
+			height: 30px;
+		}
+		#form-container #general-compra div {
+			text-align: right;
+		}
+		#form-container #general-compra ul {
+			margin-left: 10px;
+			margin-bottom: 15px;
+			border-bottom: 1px solid #bfbfbf;
+			border-top: 1px solid #bfbfbf;
+			padding-top: 10px;
+			padding-bottom: 5px;
+		}
+			#form-container #general-compra ul li {
+				list-style: none;
+				margin-bottom: 10px;
+				font-size: 0.9em;				
+			}
+	#form-container #titulo {
+		margin-bottom: 20px;
+		font-size: 1em;
+		font-weight: bold;
+		color: #5e5e5e;
+		display: block;
+	}

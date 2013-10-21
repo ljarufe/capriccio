@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/media/css/opciones.css">
+	<script type="text/javascript" src="/media/js/clientes/opciones.js"></script>
+	
+{% endblock %}
+
+{% block body %}
+
+	<div id="cont_izq"></div>
+	<div id="cont_der">
+		<h2>Opciones de su cuenta</h2>
+		
+		<!-- Cambiar los datos de una cuenta -->
+		<div id="form_div">
+			<h3>Datos de su perfil</h3>
+			<form method='post' action=''>
+				<table id="form_table">
+					{{ cliente_form.as_table }}
+					{{ direccion_form.as_table }}
+					<tr><th></th>
+						<td><input type="submit" value="Modificar mis datos" id="submit"></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		
+		<!-- Cambiar la contraseña -->
+		<div id="password">
+			<h3>Cambiar su contraseña</h3>
+			<div id="validacion_password">
+				<p>Ingrese su anterior contraseña:</p>
+				<span id="password-error-ok" class="error" >
+					El password ingresado es incorrecto.
+				</span>
+				<span id="cambio-password" class="notificacion" >
+					El password se cambió correctamente.
+				</span>
+				<input type="password" id="old_password" />
+				<button id="validar_password">Validar</button>
+			</div>
+			<div id="cambiar_password">			
+				<p>Ingrese su nueva contraseña</p>
+				<ul>
+					<div id="errores-password">
+						<span class="error" id='password-error-match'>
+							Las contraseñas no coinciden, deben ser iguales.
+						</span>		
+						<span class="error" id='password-error-null'>
+							Debe ingresar una contraseña.
+						</span>		
+						<span class="error" id='password-error-length'>
+							La contraseña debe contener al menos 6 dígitos.
+						</span>
+						<span class="error" id="password-error-syntax">
+							La contraseña no puede contener estos caracteres: ...
+						</span>
+					</div>
+					<li>Contraseña nueva: <input type="password" id="password1" /></li>
+					<li>Contraseña nueva (vuelva a ingresarla): <input type="password" id="password2" /></li>
+					<li><button id="nuevo_password">Cambiar</button></li>
+				</ul>
+			</div>
+		</div>
+		
+		<!-- Dar de baja una cuenta -->
+		<div id='eliminar_cuenta'>
+			<h3>Dar de baja a la cuenta</h3>
+			<p>Su cuenta se dará de baja cuando confirme el e-mail que le enviemos.<br/>¿Desea recibir el e-mail de confirmación?</p>
+			<form method="post" action="{% url eliminar_cliente %}">
+				<input type="submit" id='email_baja' value="Recibir" />
+			</form>
+		</div>
+	<div id="clear"></div>
+	</div>
+	
+{% endblock %}

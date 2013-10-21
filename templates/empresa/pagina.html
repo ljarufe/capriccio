@@ -1,0 +1,6 @@
+{% extends "base.html"%}
+{% block body %}
+	{% for i in pag %}
+		{{ i.contenido|safe }}
+	{% endfor %}
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {% trans 'Administracion Capriccio' %}{% endblock %}
+{% block extrahead %}{{ block.super }}
+{% url admin:jsi18n as jsi18nurl %}
+<script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
+<script type="text/javascript" src="/media/js/jquery-1.3.2.js"></script>
+
+{{ media }}
+{% endblock %}
+{% block branding %}
+<img src="/media/img/admin/logocapriccio.png" />
+<h1 id="site-name">{% trans 'Capriccio - Admin' %}</h1>
+<div><h2>Manejador de Contenidos</h2></div>
+
+{% endblock %}
+{% block coltype %}{% if ordered_objects %}colMS{% else %}colM{% endif %}{% endblock %}
+
+{% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
+
+{% block breadcrumbs %}{% if not is_popup %}
+<div class="breadcrumbs">
+     <a href="/admin">{% trans "Home" %}</a> &rsaquo;
+     <a href="../../">{{ app_label|capfirst|escape }}</a> &rsaquo; 
+     {% if has_change_permission %}<a href="../">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %} &rsaquo; 
+     {% if add %}{% trans "Add" %} {{ opts.verbose_name }}{% else %}{{ original|truncatewords:"18" }}{% endif %}
+</div>
+{% endif %}{% endblock %}
+
+{% block content %}
+
+{{ notice }}
+
+{% if compra %}
+	
+	<div><label>Nombre : </label>{{ compra.cliente }}</div>
+	<div><label>Total : </label>{{ compra.total }}</div>
+	<div><label>Fecha Pedido : </label>{{ compra.fecha_pedido }}</div>
+	<div><label>Fecha Entrega : </label>{{ compra.fecha_entrega }}</div>
+	<div><label>Direcci&oacute;n Entrega : </label>{{ compra.direccion_entrega }}</div>
+{% endif %}
+{% if prod %}
+{% for i in prod %}
+	<div><label>Producto : </label>{{ i }}</div>
+	<div><label>Cantidad : </label>{{ i.cantidad }}</div> 
+	<div><label>Imagen Producto : </label>{{ i.producto.img_producto|safe }}</div> 
+{% endfor %}
+{% endif %}
+{% endblock %}
+
+
+

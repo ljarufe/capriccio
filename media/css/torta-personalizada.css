@@ -1,0 +1,233 @@
+p{
+	font-size:13px;
+	text-align:justify;
+	margin-bottom:10px;
+}
+h3.bullet-trigger{
+	cursor:pointer;
+}
+img.figuras{
+	height:120px;
+}
+#galeria{
+	width:490px;
+	padding:10px;
+	background-color:#ffffff;
+	margin-bottom:10px;
+	margin-top:5px;
+	border:1px solid #ffffff;
+    -moz-box-shadow:1px 0.5px 5px #000;
+    -webkit-box-shadow:1px 0.5px 5px #000;
+    -moz-border-radius-bottomleft:5px;
+    -moz-border-radius-bottomright:5px;
+    -moz-border-radius-topleft:5px;
+    -moz-border-radius-topright:5px;
+    -webkit-border-radius-bottomleft:5px;
+    -webkit-border-radius-bottomright:5px;
+    -webkit-border-radius-topleft:5px;
+    -webkit-border-radius-topright:5px;
+}
+	#galeria #detalle{
+		width:460px;
+		background-color:#ffffff;
+		margin-bottom:25px;
+		position:relative;
+		margin:auto;
+		padding:5px;
+	}
+		#galeria #detalle div.imagen-detalle{
+			width:460px;
+			background-color:#ffffff;
+		}
+        #galeria #detalle div.imagen-detalle div.cake a img{
+			border:1px solid #ffffff;
+            -moz-box-shadow:1px 1px 5px #000;
+            -webkit-box-shadow:1px 1px 5px #000;
+		}
+	#galeria #thumbnails{
+		width:460px;
+		height:95px;
+		margin-bottom:5px;
+		position:relative;
+		margin:auto;
+		padding:5px;
+		overflow:hidden;
+	}
+		#galeria #thumbnails #thumb-cake{
+			height:95px;
+			position:relative;
+			width:4000px;
+		}
+			#galeria #thumbnails #thumb-cake div{
+				position:relative;
+				float:left;
+				margin-right:7px;
+				border:1px solid #fff;
+				padding:1px;
+			}
+
+            div.miniCake a img{
+                border:1px solid #ffffff;
+                -moz-box-shadow:1px 1px 5px #000;
+                -webkit-box-shadow:1px 1px 5px #000;
+            }
+#scroll{
+	height:127px;
+	width:9000px;
+}
+	#scroll div{
+		float:left;
+		position:relative;
+		padding:2.5px;
+		border:1px solid #aaa;
+		margin:0 5px 0 5px;
+	}
+#busqueda {
+	/*margin-left: 50px;
+	margin-top: 50px;*/
+}
+
+.carrito2{
+	/*margin-top: 20px;
+	margin-left: 50px;*/
+	font-size: 0.8em;
+	z-index: 19;
+	color: #4d4d4d;
+}
+	.carrito2 #titulo-carrito{
+		font-size: 0.9em;
+		color: #4d4d4d;
+	}
+	.carrito2 #ciudad{
+		font-size: 0.9em;
+		color: #b0550e;
+		text-decoration: underline;
+		display: inline;
+		margin-right: 25px;
+		cursor:pointer;
+	}
+	.carrito2 table{
+		margin-top: 10px;
+		font-size: 0.9em;
+		display: block;
+		padding: 0px;
+	}
+	
+	.carrito2 a {
+		color: #B0550E;
+		font-size: 0.8;
+	}
+		.carrito2 input, .carrito2 select{
+			margin-bottom: 10px;
+			padding: 5px;
+			padding-left: 10px;
+			border: 1px solid #bfbfbf;
+			color: #4d4d4d;
+			width: 110px;
+		}
+		.carrito2 id_image{
+			margin-bottom: 10px;
+			padding: 5px;
+			padding-left: 10px;
+			border: 1px solid #bfbfbf;
+			color: #4d4d4d;
+			width: 110px;
+		}
+		.carrito2 textarea{
+			width:180px;
+			margin-bottom: 10px;
+			padding: 5px;
+			padding-left: 10px;
+			border: 1px solid #bfbfbf;
+			color: #4d4d4d;
+		}
+		.carrito2  p label{
+			position:relative;
+			float:left;
+			width:57px;
+		}
+		.carrito2 #id_fecha_entrega {
+			width: 85px;
+			margin-right: 3px;
+		}
+		.carrito2 select{
+			background-color: white;
+			width: 132px;
+		}
+		.carrito2 table th{
+			font-weight: normal;
+			text-align: left;
+		}
+		.carrito2 table td{
+			padding-left: 10px;
+		}
+		.carrito2 #submit{
+			padding-left: 5px;
+			color: #000000;
+			background-color: #e5e5e5;
+			border: 1px solid #bfbfbf;
+			width: 80px;
+		}
+
+
+.lista-productos{
+	/*margin-left: 230px;*/
+}
+
+.step-links{	
+	margin-left: 20px;
+}
+	.step-links .current{
+		font-size: 0.9em;
+		color: #7f7f7f;
+		font-weight: normal;
+		top: 0px;
+	}
+	.step-links a:link { color: #b0550e; }
+	.step-links a:visited { color: #b0550e; }
+	.step-links a:hover { text-decoration: none; }
+	.step-links a:active { color: #ffa500; }
+
+	
+/*  Botonera ant - sig thumbnails  */
+#navigator{
+	position:relative;
+	top:-40px;
+}
+#botonera {
+		background: url(/media/img/recursos/fondos/des_foto_galeria.png);
+		float: right;
+		position: relative;
+		top: 0px;
+		margin-right: 5px;
+		padding: 3px 3px 2px 3px;
+		-moz-border-radius: 10px;
+		-webkit-border-radius: 10px;
+	}
+	
+	#botonera_texto {
+		float: right;
+		font-size: 9px;
+		line-height: 18px;
+		letter-spacing: -1px;
+		padding: 0px 5px;
+		color:#ffffff;
+	}
+
+	.boton {	
+		background: url(/media/img/recursos/iconos/flechas.png) no-repeat;
+		float: right;
+		width: 20px;
+		height: 20px;
+		margin: 0px;
+		z-index: 2;
+		cursor: pointer;
+	}
+	
+	#sig {
+		background-position: -20px 0px;	
+	}
+	
+	#ant {
+		background-position: 0px 0px;	
+	}	

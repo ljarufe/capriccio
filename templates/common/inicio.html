@@ -1,0 +1,89 @@
+{% extends "base.html"%}
+{% load commontags %}
+
+{% block head %}
+
+	<link rel="stylesheet" type="text/css" href="/media/css/inicio.css" media="screen" />
+	<script type="text/javascript" language="JavaScript" src="/media/ui/js/jquery-ui-1.8.4.custom.min.js"></script>
+	<script type="text/javascript" language="JavaScript" src="/media/instant/instant.js"></script>	
+	<script type='text/javascript' src='/media/js/common/inicio.js'></script>
+	<script type='text/javascript'>
+		var num_ban = {{ banners|length }};
+	</script>
+	
+{% endblock %}
+
+{% block body %}
+
+	<!-- Contenedor Izquierda -->
+	<div id="cont_izq" style="display:none;" >
+		<!-- Login de usuario -->
+		<div class="cuerpo-login cuadro-izq">
+			{% if user.is_authenticated %}
+				Bienvenido {% get_nombre_usuario user %}! 
+			{% else %}
+				<!-- Formulario de login -->
+				<form method='post' action='/clientes/registro/'>
+					<h3>Registrate!</h3>
+					<h4 style="font-size:11px; padding-bottom:10px;">Registrate en nuestro sitio y podras realizar pedidos desde la comodidad de tu casa.</h4>
+					<ul>
+						<li class="form-titulo">E-mail</li>
+						<li>
+							<input class="form-text" id="email" type="text" name="email"/>
+						</li>
+						<li id="form-submit">
+							<input type="submit" value="Completar registro" id='buttom' class="boton_grande" style="padding:5px 10px; border:1px solid #d27104;"/></td>
+						</li>
+					</ul>			
+				</form>
+				
+			{% endif %}
+			
+		</div>
+		<!--#TODO:banner animado -->		
+	</div>
+    
+	<!-- Contenedor Centro -->
+    <div id="cont_centro">
+		<div id="banner">
+        	<div id="titulo">
+            	<div id="titulo-texto">{{ first.nombre }}</div>
+                <div id="botonera">
+                    <div id="ant" class="flecha"></div>
+                    <div id="sig" class="flecha"></div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+        	<div id="banner-imagen">
+                <a href=""><div class="imagen"><img src="media/img/banner.gif" /></div></a>
+            </div>
+            
+            <script type="text/javascript">
+				var urls = new Array();
+				var titulos = new Array();
+				{% for j in ini %}
+					urls.push("{{ j.imagen.extra_thumbnails.detalle }}");
+					titulos.push("{{ j.nombre }}");
+				{% endfor %}
+				banners(urls,titulos);
+			</script>
+		</div>
+        <div id="vinculos">
+        	<div id="tienda-linea" class="cuadro">
+            	<p>Ingresa a nuestra tienda en línea:</p>
+                <a href="{% url tienda_en_linea %}"><img src="media/img/tienda_en_linea.png" border="0"/></a>
+            </div>
+            <div id="redes" class="cuadro">
+            	<p>Compartelo con tus familiares o amigos:</p>
+                <a  id="facebook"  name="fb_share" type="button_count" href="http://www.facebook.com/sharer.php?u=http://capriccioperu.com/&t=Capriccio%20|%20Bienvenido&src=sp"><img src="media/img/facebook.png" /></a>
+                <a href="http://twitter.com/share?_=1289255582383&count=horizontal&original_referer=http://capriccioperu.com/&text=Capriccio%20|%20Bienvenido&url=http://capriccioperu.com/" class="twitter-share-button" data-count="horizontal"><img src="media/img/twitter.png" /></a>
+            </div>
+            <div id="registro" class="cuadro">
+            	<p>Registrate para recibir nuestras promociones:</p>
+                <a href="/clientes/registro/"><img src="media/img/mail.png" /></a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+{% endblock %}

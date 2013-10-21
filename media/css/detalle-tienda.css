@@ -1,0 +1,168 @@
+.info-tienda{
+	/*margin-top: 70px;
+	margin-left: 52%;*/
+}
+	.info-tienda ul{
+		
+	}
+		.info-tienda ul li{
+			list-style: none;
+			margin-bottom: 5px;
+		}
+		
+		.info-tienda ul #nombre-tienda{
+			font-size: 1.5em;
+			/*font-variant: small-caps;*/
+			font-weight: normal;
+			margin-bottom: 20px;
+			/*padding-bottom: 5px;*/
+			/*background-image: url(/media/img/barraNovedades.png);*/
+			background-position: bottom left;
+			background-repeat: no-repeat;
+		}		
+		
+		.info-tienda ul .titulo{
+			color: #1a1a1a;
+		}
+		
+		.info-tienda ul #direccion-tienda, .info-tienda ul #telefono-tienda,.info-tienda ul #email-tienda,.info-tienda ul #persona-tienda{
+			font-size: 0.9em;
+			color: #7f7f7f;
+			margin-left: 10px;
+		}
+			.info-tienda ul li #map{
+				width: 350px;
+				height: 250px;
+				margin-top: 15px;
+				margin-left: 15px;
+				border: 1px solid #4d4d4d;				
+			}
+				.info-tienda ul li #map span{
+					display: none;
+				}
+
+/* Fotos de la tienda */
+.fotos-tienda img{
+	padding: 5px;
+	background:#ffffff;
+	border: 1px solid #FFF;
+	-moz-box-shadow: 1px 1px 5px #000;
+	-webkit-box-shadow: 1px 1px 5px #000;
+	margin-bottom:10px;
+}
+.fotos-tienda {
+	/*position: relative;
+	top: 80px;
+	left: 0px;
+	width:210px;
+	height: 230px;*/
+}
+	.fotos-tienda ul{
+		
+	}
+		.fotos-tienda ul li{
+			/*display: inline-block;*/
+		}
+		.fotoTienda{
+			/*position: absolute;
+			left: 25px;*/
+		} 
+
+.carta-tienda {
+	/*width: 900px;*/
+	height: 500px;
+	/*position: relative;*/
+	border: 1px solid #CCC;
+	padding:0px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	overflow:hidden;
+}
+.carta-tienda #fbContainer{
+	border:0px solid #FF0000;
+	margin-left:-120px;
+	width:900px;
+}
+.carta-tienda ul li{
+	display: inline-block;
+}
+	.carta-tienda #titulo-carta {
+		position: relative;
+		margin-bottom: 20px;
+		display: block;
+		font-size: 1.1em;
+		font-weight: bold;
+		color: #4d4d4d;	
+		top: -50px;	
+	}
+/*
+para el estilo de la carta
+*/
+.mover{
+	position: absolute;
+	width:400px;
+	height: 400px;
+	margin-left: 50%;
+	left: -200px;
+	display: inline-block;
+	margin-top: 50px;
+}
+.ayuda{
+	/*position: absolute;*/
+	/*top: 500px;
+	left: 610px;*/
+	position: absolute;
+	background: #f7efc4;
+	width: 150px;
+	height:100px;
+	opacity:0;
+	left: 800px;
+	top: 200px;
+	filter:alpha(opacity=0);
+	border: 5px #efe18f solid;
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-right-radius:5px;
+	border-top-left-radius:5px;
+	border-bottom-right-radius:5px;
+	border-bottom-left-radius:5px;
+}
+.cartaIngreso{
+	position: relative;
+	background: #f7efc4;
+	display: inline-block;
+	border: 5px #efe18f solid;
+	text-align: center;
+	padding: 10px;
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-right-radius:5px;
+	border-top-left-radius:5px;
+	border-bottom-right-radius:5px;
+	border-bottom-left-radius:5px;
+}
+.mostrarCarta{
+	background:#000000;
+	height:100%;
+	width:100%;
+	opacity:0.4;
+	filter:alpha(opacity=40);
+}
+.numero p{
+	background: #000000;
+	color: #ffffff;
+	border: 3px double #c0c0c0;
+	padding: 5px;
+	cursor: pointer; 
+}
+.mapa{
+	background: #bfbfbf;
+	margin-top: 10px;
+	color: #000;
+	padding:2px;
+
+}

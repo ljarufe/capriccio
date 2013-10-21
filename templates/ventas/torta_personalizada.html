@@ -1,0 +1,204 @@
+{% extends "base.html"%}
+
+{% block head %}
+
+	<link rel="stylesheet" type="text/css" href="/media/search_box/search_box.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="/media/input_file/input_file.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="/media/css/compra-productos.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="/media/css/torta-personalizada.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}colorbox/example1/colorbox.css" media="screen" />	
+	<script type="text/javascript" src='/media/js/ventas/torta_personalizada.js'></script>	
+	<script type="text/javascript" src="/media/search_box/jquery.search_box.js"></script>
+	<script type="text/javascript" src="/media/input_file/jquery.input_file.js"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}colorbox/colorbox/jquery.colorbox.js"></script>
+	
+	<script type='text/javascript'>
+	
+		function tortas_disponibles(){
+			$("#id_producto").html('');
+			{% for producto in lista_productos %}
+				cambio = aPrecioVenta({{ producto.precio }});
+				$("#id_producto").append("<option value='{{ producto.id }}' name='" + cambio + "'>{{ producto.nombre }}</option>");
+			{% endfor %}
+		}
+		
+		var tipo_cambio = {{ tipo_cambio }};
+		
+		$(document).ready(function(){
+			var inicio = "";
+			$("#celebraciones").hide();
+			$(".cake").not($(".cake:first")).hide();
+			$("a[rel='example1']").colorbox();
+			$("#id_fecha_entrega").addClass('date-picker hasDatePicker');
+			//despliegue de parrafos capriccio
+			$(".bullet-trigger").click(function(){
+				var id = $(this).attr("idb");
+				var indice = id.split("-");
+				$(".textos").not($("#"+indice[1])).hide();
+				$("#"+indice[1]).slideToggle();
+				var despliegue = $("#"+indice[1]).css("display");
+				if (despliegue == "none"){
+					$(this).find("img").attr("src","/media/img/arrow_r.png");
+				}
+				else{
+					$(this).find("img").attr("src","/media/img/arrow_d.png");
+				}
+			});
+			//intervalo para la rotacion de las figuras
+			var i = 0;
+			var left = 0;
+			var extension = $("#scroll div").length;
+			function init(){
+				inicio = setInterval(function(){
+				var divRotacion = $("#scroll div");
+				//var anchoImagen = $(divRotacion[i]).width() + 10 + 2 + 2.5 + 2.5;
+				//izquierda = anchoImagen + left;
+				//$("#slide").scrollLeft(izquierda,4000);
+				$(divRotacion[i]).clone().insertAfter($("#scroll div:last"));
+				$(divRotacion[i]).fadeOut("fast");
+				$(divRotacion[i]).addClass('eliminar');
+				//left = izquierda;
+				i++;
+				if (i == extension){
+					i = 0;
+					pause();
+					$(".eliminar").remove();
+					init();
+				}
+				
+			},5000);
+			}
+			function pause(){
+				clearInterval(inicio);
+			}
+			init();
+			// Seleccion de la ciudad para las compras
+			{% if ciudad_sesion %}
+			{% else %}
+				seleccionar_ciudad();
+			{% endif %}
+	
+			// Buscador
+			var database = new Array();
+			var i = 0;
+	
+			{% for producto in lista_productos %}
+				database[i] = new Array(4);
+				database[i][0] = {{ producto.id }};
+				database[i][1] = "{{ producto.nombre }}";
+				database[i][2] = "{{ producto.descripcion }}";
+				database[i][3] = "{{ producto.imagen.imagen.thumbnail }}";
+				i++;
+			{% endfor %}
+
+			$('#buscador').SearchBox(database, select_item);
+			$('.miniCake a').click(function(event){
+				var ref = $(this).attr('href');
+				$('.cake').not($(ref)).hide();
+				$(ref).fadeIn();
+				return false;
+				event.preventDeafult();
+			});
+			var d = $(".miniCake");
+			var i = 0;
+			var avance = 0;
+			$("#sig").click(function(){
+				if (d.length > 4){
+					if ((d.length - i) == 4){
+						
+					}
+					else{
+						avance = avance + 113;
+						$("#thumbnails").scrollLeft(avance,"slow");
+						i++;
+					}
+					
+				}
+				
+			});
+			$("#ant").click(function(){
+				if (d.length > 4){
+					if (avance == 0){
+						
+					}
+					else{
+						avance = avance - 113;
+						$("#thumbnails").scrollLeft(avance);
+						i--;
+					}
+					
+				}
+				
+				
+			});
+		});
+	</script>
+	
+{% endblock %}
+
+{% block body %}
+	<!-- Contenedor Izquierda -->
+	<div id="cont_izq">
+		<!-- Buscador de productos -->
+			
+		<!-- Personalizar la torta -->
+		<div class="carrito2 cuadro-izq">
+			<h2>Env&iacute;anos la imagen con la que quieres personalizar tu torta</h2>
+			<form action="{% url contact %}" method="post" enctype="multipart/form-data">
+				{{ form_imagen.as_p }}
+				<input type="submit" name="go" value="Enviar Consulta"/>
+			</form>
+		</div>
+	</div>
+	
+	<!-- Contenedor Derecha -->
+	<div id="cont_der">
+		<!-- Lista de productos -->
+		<div>
+            <h3 class="bullet-trigger" idb="bullet-personalizacion"><img src="/media/img/arrow_r.png"/>CON IMÁGENES (PERSONALIZADAS E INSTITUCIONALES)</h3>
+			<div id="personalizacion" class="textos">
+            <p>
+                Ponemos la magia del mundo de las im&aacute;nes en su torta.
+			</p>
+			<p>
+                Cualquier imagen que usted pueda poner en una computadora, nosotros la imprimimos sobre una base de crema chantilly que luego se fusiona con el resto de la torta y con una tinta 100% comestible, quedando la impresi&oacute;n con la misma calidad de una fotograf&iacute;a como parte del decorado.
+			</p>
+			<p>
+                Desde instituciones que quieren poner su imagen en una torta de aniversario hasta propuestas editadas, donde usted puede aparecer integrando el equipo de f&uacute;tbol campe&oacute;n del mundo o su hijo puede estar jugando con sus personajes favoritos o caricaturas hechas sobre im&aacute;genes reales, sin l&iacute;mite para todo lo que pueda imaginar.
+			</p>
+			<p>
+                Tambi&eacute;n los podemos ayudar en la selecci&oacute;n y edici&oacute;n de las im&aacute;genes de acuerdo con sus sugerencias.
+			</p>
+			<p>
+                Estas im&aacute;genes no se imprimen sobre papel arroz sino sobre crema chantilly, de forma que usted no tiene que cortar el papel es la misma crema chantilly que se integra finamente en la superficie y forma parte del resto de la torta, manteniendo la calidad de la imagen y sin afectar en nada el sabor ni la calidad de la torta.
+            </p>
+			</div>
+			<!-- slide -->
+			<div id="galeria">
+				<div id="detalle">
+					<div class="imagen-detalle">
+						{% for cake in personalizada %}
+							<div align="center" class="cake" id="{{ cake.nombre }}"><a href="{{ cake.imagen.extra_thumbnails.presentacion }}" rel="example1" title="{{ cake.nombre }}"><img src="{{ cake.imagen.extra_thumbnails.detalle }}" alt="{{ cake.nombre }}" border="0"/></a></div>
+						{% endfor %}
+					</div>
+				</div>
+				<div id="thumbnails">
+					<div id="thumb-cake">
+						{% for miniCake in personalizada %}
+							<div class="miniCake"><a href="#{{ miniCake.nombre }}"><img src="{{ miniCake.imagen.extra_thumbnails.galeria }}" alt="{{ cake.descripcion }}"border="0"/></a></div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+			<div id="navigator">
+				<div id="botonera"><div id="sig" class="boton"></div><span id="botonera_texto">Navegar</span><div id="ant" class="boton"></div></div>
+			</div>				
+			<!-- end slide -->
+			<!-- parrafos con textos capriccio -->
+
+			<!-- end parrafos -->
+		</div>
+		
+	</div>
+	
+{% endblock %}

@@ -1,0 +1,184 @@
+{% load cache %}
+{% load cachetags %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Capriccio | {{titulo}}</title>
+<<<<<<< .mine
+				
+		<script type="text/javascript" src="/media/js/jquery-1.4.2.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="/media/css/style.css" media="screen" />
+=======
+		
+		<script type="text/javascript" src="/media/js/jquery-1.4.2.min.js"></script>
+>>>>>>> .r224
+		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+		<script type='text/javascript' src='/media/js/common/base.js'></script>
+		<link rel="stylesheet" type="text/css" href="/media/css/style.css" media="screen" />
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<meta name='description' content=''/>
+		<meta name='keywords' content=''/>
+		
+		{% block head %}
+		{% endblock %}
+		<script type='text/javascript'>
+			
+			$(document).ready(function(){			
+				
+				// Cerrar el cuadro de la ciudad
+				$('#cerrar-frame-ciudad').click(function(){
+					{% if ciudad_sesion %}
+						$('.ciudad-frame').slideUp('slow', function(){
+							$('.Luces').fadeOut('slow');
+						});
+					{% else %}
+						alert('Por favor seleccione una ciudad para continuar');
+					{% endif %}
+				});
+				
+				$(".cartaIngreso").click(function(){
+					mostrar_carta();
+				});
+			});	
+		</script>
+		
+	</head>
+	<body>
+		
+		<div class='mostrar-carta-tienda' style="position:absolute;">		
+		<span id="titulo-carta">Carta:</span>
+		{% for pagina in carta %}
+			<div class="mover">
+				<img src="{{ pagina.pagina.url }}" style=" width:550px; height:1000px;"/>
+			</div>
+		{% endfor %}
+		</div>
+		<!-- div que cubre todo la pagina para "apagar las luces" -->
+		<div class='Luces'></div>
+		
+		<!-- Cuadro para escoger la ciudad -->
+		<div class='ciudad-frame'>
+			<h2>Selecciona tu localidad:</h2>
+			<h3>Ciudad:</h3>
+			<form method='get' action=''>			
+				<select name='ciudad'>
+				{% for ciudad in ciudades %}
+					<option value='{{ ciudad.id }}'>{{ ciudad.nombre }}</option>
+				{% endfor %}				
+				</select>
+				<div id='ciudad-footer'>
+					<input type='submit' value='Guardar'/>
+					<span id='cerrar-frame-ciudad'>Cerrar</span>
+				</div>
+			</form>
+		</div>
+		
+		<!-- Cuadro con los detalles y foto de un producto -->
+		<div class='producto-frame'><ul></ul></div>
+
+
+		
+		
+		
+		<!-- R: Contenedor -->
+		<div id="contenedor">
+				
+			<!-- Cabecera -->	
+			<div id="header">
+				<div id="header_bar">
+					<!-- Logo -->
+					<div id="logo"><span class="nombre">Capriccio</span> | Tienda en Linea</div>
+					
+					<!-- Menu -->		
+					<div class="menu">
+					<ul>
+						<li id='menu-tiendas'>
+							<a href='{% url tiendas %}'>Tiendas</a>
+							<div class='submenu' id='sub-tiendas'>
+								<ul>
+									<!-- Consulta realizada en el cache -->
+									{% cache 6 cache_tiendas %}
+										{% get_tiendas %}
+									{% endcache %}
+								</ul>
+							</div>
+						</li>								
+						<li id='menu-productos'>
+							<a href='{% url productos %}'>Productos</a>
+							<div class='submenu' style="left:-20px;" id='sub-productos'>
+								<ul style="left:20px;">
+									<!-- Consulta realizada en el cache -->
+									{% cache 6 cache_categorias %}
+										{% get_categorias %}
+									{% endcache %}
+								</ul>
+							</div>
+						</li>
+						<li><a href='{% url torta_personalizada %}'>
+								Torta personalizada
+							</a>
+						</li>
+						<li><a href=''>Empresa</a>
+							<div class='submenu'>
+								<ul>
+									<li style="border-left: #ffffff;">
+										<a href='{% url informacion %}'>Nosotros </a>
+									</li>
+									<li>
+										<a href=''>Equipo de trabajo</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li>
+							<a href='{% url tiendas %}'>Contacto</a>
+						</li>
+					</ul>
+				</div>
+					
+					<!-- Login de usuario -->
+					<div class="login">
+						<a href="{% url inicio %}">
+							<img id="home" width=20 src="/media/img/home.png" alt="Inicio" title="Ir a la página inicial"/>
+						</a> | 
+						{% if usuario %}			 
+							{{ usuario }} | <a href="{% url cerrar_sesion %}">Cerrar sesion</a>
+						{% else %}
+							<a href="{% url registro_cliente %}">Registrate</a> |
+							<a href="{% url inicio %}">Acceder</a>
+						{% endif %}
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div id="header_post_img"></div>
+			</div>
+				
+				
+			<div class="body">
+					{% block body %}
+					{% endblock %}
+			</div> <!-- Fin del id="body" -->
+				
+			<!-- R: <div class="sumilla"></div>
+			<div class="head">
+			</div>
+			-->
+			<!-- R: <div class="head2">
+			</div> -!>
+			
+			
+			<!--fondo del costado -->
+			<!-- R: <div class="fondoCostado"></div>
+			<div class="fondoCostado2"></div> -!>
+			
+				
+			<!-- Footer -->
+			<!-- R: <div class="blanco"></div> -->
+			<div class="footer">
+			<!-- R: <div class="footer2"></div> -->
+			</div>
+		</div>
+	</body>

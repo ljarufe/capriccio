@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<link rel="stylesheet" type="text/css" href="/media/css/detalle-tienda.css" media="screen" />
+	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=true&amp;key=ABQIAAAAMRdj9lILtQvXkiEUNZPsEBRaJ7O0gIMKduotvhyPN4YrSrlYZhTqAgSnxFz7ruq9Yt4cc8LUJzyEww" type="text/javascript"></script>
+	<script type='text/javascript'>
+		
+		//<![CDATA[
+	    function load() {
+	    	if (GBrowserIsCompatible()) {
+				var map = new GMap2(document.getElementById("map"));
+				
+				//map.addControl(new GMapTypeControl());
+				
+				map.setCenter(new GLatLng({{ tienda.ubicacion.latitud }}, {{ tienda.ubicacion.longitud }}), 17);			
+					
+				function addtag(point, address) {
+					var marker = new GMarker(point);
+					GEvent.addListener(marker, "click", function() { marker.openInfoWindowHtml(address); } );
+					return marker;
+				}
+				
+				var point = new GLatLng({{ tienda.ubicacion.latitud }}, {{ tienda.ubicacion.longitud }});	        
+				var address = '<div class="mapa"><b>{{ tienda.nombre_corto }}</b><br/>{{ tienda.direccion }}<br/></div>';
+				var marker = addtag(point, address);
+				map.addOverlay(marker);	
+	    	}
+	    }
+	    //]]>
+		
+		$(document).ready(function(){
+			load();
+        });
+		$(document).unload(function(){
+			GUnload();
+		});
+	</script>
+	
+{% endblock %}
+
+{% block body %}
+
+	<div id="cont_izq">
+			<h3>Imagenes de nuestra tienda</h3>
+			<div class='fotos-tienda'>
+				{% for foto in fotos %}
+						<div class="fotoTienda" align="center">
+							<img class="foto-tienda" src="{{ foto.imagen.thumbnail }}" alt="Imágen de la tienda"/>
+						</div>
+				{% endfor %}
+			</div>
+	</div>
+	<div id="cont_der">
+		<!-- Informacion sobre la tienda -->
+		<div class='info-tienda'>		
+			<ul>
+				<li id="nombre-tienda">{{ tienda.nombre_corto }}</li>
+				<li id="direccion-tienda"><span class="titulo">Dirección:</span> {{ tienda.direccion }}</li>
+				<li id="telefono-tienda"><span class="titulo">Teléfono: </span>{{ tienda.telefono }}</li>
+				<li id="email-tienda"><span class="titulo">E-mail Contacto:</span> {{ tienda.email_contacto }}</li>
+				<li id="persona-tienda"><span class="titulo">Persona de Contacto:</span> {{ tienda.persona_contacto }}</li>
+			</ul>
+					<div id="map" style="border:1px solid #CCC; width:510px; height:250px;"></div>					
+		</div>
+        <div class="clear"></div>
+    </div>
+	
+{% endblock %}

@@ -1,0 +1,95 @@
+/* Inicio*/
+#cont_centro{
+	padding-top: 115px;
+}
+
+#banner {
+	width:760px;
+	margin: 0 auto;
+}
+#titulo {
+	background: url(../img/banner-titulo.gif);
+	width: 400px;
+	height: 35px;
+	float: left;
+}
+
+#titulo-texto {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 17px;
+	color: #666;
+	text-shadow: #FFF 0px 1px 1px;
+	margin: 10px;
+	float: left;
+}
+
+#banner-imagen {
+	width:760px;
+	height: 200px;
+	overflow: hidden;
+	clear: both;
+}
+	#banner-imagen .imagen {
+		width:760px;
+		height: 200px;
+	}
+
+	#banner-imagen img{
+		width: 760px;
+		height: 200px;
+		border: 0px;
+	}
+
+#botonera {
+	/*background: url(../../../img/recursos/botonera.png);*/
+	float: right;
+	margin: 12px 40px 0px 0px;
+}
+
+	#botonera .flecha {
+		background: transparent;
+		width: 11px;
+		height: 14px;
+		float: left;
+		cursor: pointer;
+		overflow: hidden;
+	}
+	
+	#botonera #ant {
+		background: url(../img/izq.gif);
+		margin-right: 10px;
+	}
+	
+	#botonera #sig {
+		background: url(../img/der.gif);
+		margin-right: 10px;
+	}
+#vinculos {
+	width: 752px;
+	margin: 20px auto 0px;
+}
+
+	#vinculos .cuadro {
+		width: 250px;
+		height: 130px;
+		float: left;
+		text-align: center;
+		margin-bottom: 15px;
+	}
+	
+	#vinculos .cuadro p {
+		height: 30px;
+	}
+	
+	#vinculos .cuadro img {
+		margin: 20px auto 10px;
+		border: none;
+	}
+	
+	#vinculos #tienda-linea, #vinculos #redes {
+		border-right: 1px solid #E4E4E4;
+	}
+	
+	#vinculos #redes #facebook {
+		margin-right: 15px;
+	}

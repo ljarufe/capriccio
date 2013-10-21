@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Creaci&oacute;n - Modificaci&oacute;n | Correos Capriccio</title>
+		<link rel="stylesheet" type="text/css" href="/media/css/adminCorreos.css"/>
+		<script type="text/javascript" language="JavaScript" src="/media/js/jquery-1.3.2.js"></script>
+		<script language="JavaScript">
+			$(document).ready(function(){
+				var str = "";
+				$("#cargaAjax").hide();
+				$("#cargaAjax1").hide();
+				$("#cargaAjax2").hide();
+				$("#guardar").click(function(){
+					var valor = $("#nombre").val();
+					
+					$("#cargaAjax").show();
+					$.ajax({
+						type:"POST",
+						url:"/crearCorreo",
+						data:"correoBoxes="+valor,
+						success:function(data){
+							var html = data;
+							$("#cargaAjax").hide();
+							$("#mensajeAjax").html(html);
+							}
+					});
+				});
+                $("select").change(function(){
+                    
+                    $("select option:selected").each(function(){
+                        str = $(this).text();
+                    });
+                });
+				$("#changePass").click(function(){
+					var password = $("#pass").val();
+					
+					$("#cargaAjax1").show();
+					$.ajax({
+						type:"POST",
+						url:"/cambioPass",
+						data:"mailbox="+str+"&passwd="+password,
+						success:function(data){
+							var html = data;
+							$("#cargaAjax1").hide();
+							$("#mensajeAjax").html(html);
+						}
+					});
+				});
+				$("#eliminar").click(function(){
+					
+					$("#cargaAjax2").show();
+					$.ajax({
+						type:"POST",
+						url:"/delete",
+						data:"mbx="+str,
+						success:function(data){
+							var html = data;
+							$("#cargaAjax2").hide();
+							$("#mensajeAjax").html(html);
+						}
+					});
+				});
+				$(".visualizar").click(function(event){
+					var img = $(this).attr("href");
+					
+					$("#containerImg").append("<img src=/media/img/" + img +" />").animate({"width":"100%","height":"100%"})
+					return false;
+					event.preventDefault();
+				});
+				
+			})
+		</script>
+	</head>
+	<body>
+		<div id="container">
+		<h4>Administraci&oacute;n de Cuentas | Correo Electr&oacute;nico - Capriccio</h4>
+		<label for="mailboxes">Mailboxes y correos :<select name="mailboxes">
+			<option value="0">--Seleccionar Cuenta--</option>
+			{{ list|safe }}
+		</select><label>@capriccioperu.com</label></label></label><br/><input type="password" id="pass"/><button id="changePass">Cambiar Contrase&ntilde;a</button><span style="color:#e6e6fa;font-size:9.5px;">S&oacute;lo del elemento seleccionado</span><br/><button id="eliminar">Eliminar Cuenta</button><span style="color:#e6e6fa;font-size:9.5px;">S&oacute;lo el elemento seleccionado</span><br/>
+			<label for="correoBoxes">Nombre del Correo<input type="text" name="correoBoxes" id="nombre"/><label>@capriccioperu.com</label></label>
+			<button id="guardar">Go!</button>
+		<div id="cargaAjax"><img src="/media/img/ajax-loader.gif"/>...Creando Correo!!!</div>
+		<div id="cargaAjax1"><img src="/media/img/ajax-loader.gif"/>...Cambiando Contrase&ntilde;a!!!</div>
+		<div id="cargaAjax2"><img src="/media/img/ajax-loader.gif"/>...Eliminando Correo!!!</div>
+		<div id="mensajeAjax"></div>	
+	
+			
+		</div>
+		
+	</body>
+</html>

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+	<script type="text/javascript" src='/media/js/ventas/2checkout_form.js'></script>
+	
+{% endblock %}
+
+{% block body %}
+<div>
+		<div>
+			<form action='https://www.2checkout.com/checkout/purchase' method='post' id="checkout">
+			<input type='hidden' name="sid" value="{{ x_login|escape }}">
+			<input type='hidden' name="demo" value="Y">
+			<input type='hidden' name="lang" value="sp">		
+			<input type='hidden' name="id_type" value="1">
+			<input type='hidden' name="cart_order_id" value="{{ x_invoice_cart|escape }}">
+			<input type="hidden" name="card_holder_name" value="{{ x_cliente|escape }}"/>
+			<input type="hidden" name="street_address" value="{{ x_direccion|escape }}"/>
+			<input type="hidden" name="city" value="{{ x_direccion_ciudad|escape }}"/>
+			<input type="hidden" name="state" value=""/>
+			<input type="hidden" name="zip" value=""/>
+			<input type="hidden" name="country" value="PERU"/>
+			<input type="hidden" name="email" value="{{ x_cliente.email|escape }}"/>
+			<input type="hidden" name="phone" value="{{ x_telefono|escape }}"/>
+			<input type="hidden" name="phone_extension" value=""/>
+			<input type="hidden" name="ship_name" value="{{ x_cliente|escape }}"/>
+			<input type="hidden" name="ship_steet_address" value="{{ x_direccion|escape }}"/>
+			<input type="hidden" name="ship_city" value="{{ x_direccion_ciudad|escape }}"/>
+			<input type="hidden" name="ship_state" value=""/>
+			<input type="hidden" name="ship_zip" value=""/>
+			<input type="hidden" name="ship_country" value="PERU"/>
+			<input type='hidden' name="total" value="{{ x_ammount|escape }}">
+</form>
+		{{ x_cliente.email|escape }}
+		{{ x_cliente|escape }}
+		</div>
+		</div>
+        <div id="cont_der">
+		<div>
+			<h3>Espere un momento mientras nos conectamos!!!</h3><img src="/media/img/loader.gif"/>
+		</div>
+        </div>
+
+{% endblock %}

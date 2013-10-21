@@ -1,0 +1,197 @@
+{% load cache %}
+{% load cachetags %}
+{% load commontags %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=7" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>Capriccio | {{ titulo }}</title>
+
+		<script type="text/javascript" src="/media/js/jquery-1.4.2.min.js"></script>
+
+
+		<link href="{{ MEDIA_URL }}colorbox/example1/colorbox.css" rel="stylesheet" type="text/css" media="screen"/>
+
+		<script type="text/javascript" language="JavaScript" src="{{ MEDIA_URL }}colorbox/colorbox/jquery.colorbox.js"></script>
+		<script type='text/javascript' src='/media/js/common/base.js'></script>
+		<link rel="stylesheet" type="text/css" href="/media/css/style.css" media="screen" />
+		<link href="/media/jquery-ui/css/ui-lightness/jquery-ui-1.8.1.custom.css" rel="stylesheet" type="text/css"/>
+		<script type="text/javascript" src="/media/js/jquery-1.4.2.min.js"></script>
+		<script src="/media/jquery-ui/js/jquery-ui-1.8.1.custom.min.js"></script>
+		<meta name='description' content=''/>
+		<meta name='keywords' content=''/>
+
+		{% block head %}
+		{% endblock %}
+		<script type='text/javascript'>
+
+			$(document).ready(function(){
+
+				// Cerrar el cuadro de la ciudad
+				$('#cerrar-frame-ciudad').click(function(){
+					{% if ciudad_sesion %}
+						$('.ciudad-frame').slideUp('slow', function(){
+							$('.Luces').fadeOut('slow');
+						});
+					{% else %}
+						alert('Por favor seleccione una ciudad para continuar');
+					{% endif %}
+				});
+
+			});
+		</script>
+
+	</head>
+	<body>
+		<!-- div que cubre todo la pagina para "apagar las luces" -->
+		<div class='Luces'></div>
+		<!-- Cuadro para escoger la ciudad -->
+		<div class='ciudad-frame'>
+			<h2>Selecciona tu localidad:</h2>
+			<h3>Ciudad:</h3>
+			<form method='get' action=''>
+				<select name='ciudad'>
+				{% for ciudad in ciudades %}
+					<option value='{{ ciudad.id }}'>{{ ciudad.nombre }}</option>
+				{% endfor %}
+				</select>
+				<div id='ciudad-footer'>
+					<input type='submit' value='Continuar'/>
+				</div>
+			</form>
+		</div>
+
+		<!-- Cuadro con los detalles y foto de un producto -->
+		<div class='producto-frame'><ul></ul></div>
+
+		<!-- R: Contenedor -->
+		<div id="contenedor">
+			<!-- Login -->
+			<div id="box_login">
+				<h3 style="font-size:16px;">Inicio de sesi&oacute;n</h3>
+				<form method='post' action='/accounts/login/'>
+					<table>
+						<tr><td>E-mail:</td><td><input name="usuario" type="text" class="input" /></td></tr>
+						<tr><td>Contrase&ntilde;a: </td><td><input name="password" type="password" class="input" /></td></tr>
+						<tr><td colspan="2" align="center"><input type="submit" value="Entrar" class="boton_grande" /></td></tr>
+					</table>
+				</form>
+				{% if usuario_invalido %}
+				<script type="text/javascript">
+					var usuario_invalido = true;
+				</script>
+				<div class="Notificacion" style="background:#FF9999; padding:8px;">
+					Su usuario o contrase&ntilde;a no son correctos<br />
+					<!-- Recuperar una contraseÃ±a -->
+					{% if usuario_invalido %}
+					<a href="{% url recuperar_password %}">Recuperar mi contrase&ntilde;a</a>
+					{% endif %}
+				</div>
+			{% endif %}
+			</div>
+			<!-- End login -->
+			<!-- Cabecera -->
+			<div id="header">
+            	<!-- Logo -->
+            	<div id="logo"><a href="{% url inicio %}" title="Volver al Inicio"><div id="img"></div></a></div>
+            	<div id="header_bar">
+
+
+
+					<!-- Menu -->
+					<div class="menu">
+					<!--[if lte IE 6]>
+					<style>.menu {position: absolute;}</style>
+					<![endif]-->
+						<ul>
+						<li class="tiendas"><a class="drop" href="#">Tiendas
+						<!--[if IE 7]><!--></a><!--<![endif]-->
+						<!--[if lte IE 6]><table><tr><td><![endif]-->
+						<!-- Consulta realizada en el cache -->
+						<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+						</li>
+						<li class="productos"><a class="drop" href="#">Productos
+						<!--[if IE 7]><!--></a><!--<![endif]-->
+						<!--[if lte IE 6]><table><tr><td><![endif]-->
+						<!-- Consulta realizada en el cache -->
+						<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+						</li>
+						<li class="torta" id="long"><a class="drop" href="#">Torta personalizada
+						<!--[if IE 7]><!--></a><!--<![endif]-->
+						<!--[if lte IE 6]><table><tr><td><![endif]-->
+						<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+						</li>
+						<li class="nosotros" id="somos"><a class="drop" href="#">Nosotros
+						<!--[if IE 7]><!--></a><!--<![endif]-->
+						<!--[if lte IE 6]><table><tr><td><![endif]-->
+						<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+						</li>
+						<li class="contacto"><a class="drop" href="#">Contacto
+						<!--[if IE 7]><!--></a><!--<![endif]-->
+						<!--[if lte IE 6]><table><tr><td><![endif]-->
+
+						<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+						</li>
+						</ul>
+						<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+						</li>
+						</ul>
+						</div>
+
+					<!-- Login de usuario -->
+					<div class="login">
+						{% if user.is_authenticated %}
+							<div id="nombre">Hola {% get_nombre_usuario user %}</div> |
+							<a href="{% url opciones_usuario %}">Opciones</a> |
+							<a href="{% url cerrar_sesion %}">Salir</a>
+						{% else %}
+							<a href="#">Registrate</a> |
+							<a href="#" id="">Iniciar sesi&oacute;n</a>
+						{% endif %}
+					</div>
+				</div>
+            	<div class="clear"></div>
+			</div>
+
+			<!--[if lte IE 6]>
+			<style>
+				#cont_izq {
+					overflow: hidden;
+				}
+			</style>
+			<![endif]-->
+
+			<div class="body">
+					{% block body %}
+					{% endblock %}
+                  <div class="clear"></div>
+                 <div id="navegacion">
+                    <ul class="una-col">
+                        <li class="titulo"><a href="#">Tiendas</a></li>
+                    </ul>
+                    <ul class="tres-col">
+                        <li class="titulo"><a href="#">Productos</li></a></li>
+                    </ul>
+                    <ul class="una-col">
+                        <li class="titulo"><a href="#">Empresa</a></li>
+                    </ul>
+                    <ul class="una-col">
+                        <li class="titulo"><a href="#">Contacto</a></li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+                <!-- Footer -->
+				<div class="footer">
+					<div class="footer_text">Capriccio 2010 - Todos los Derechos Reservados</div>
+				</div>
+                <div class="clear"></div>
+			</div> <!-- Fin del id="body" -->
+
+
+			<!-- R: <div class="blanco"></div> -->
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	</body>

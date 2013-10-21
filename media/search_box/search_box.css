@@ -1,0 +1,62 @@
+/* Stylesheet for the search box widget */
+
+/* Input field */
+#search_box_input {
+	/*width: 220px;*/
+	border: none;
+	padding: 2px 3px;
+	margin: 1px 0px 0px 25px;
+	/*-moz-border-radius-topright: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;*/
+	color: #808080;
+	background-repeat: no-repeat;
+	background-position: 5px 0px;
+	width: 165px;
+	margin-bottom: 10px;
+}
+
+/* List of matches */
+.search_box_all {
+	margin-top: 2px;
+	position: absolute;
+	background-color: #DDD;
+	width: 205px;
+	padding: 2px;
+	/*border: 1px solid #bfbfbf;*/
+	z-index: 7;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	display: none;
+}
+	.search_box_all ul li {
+		background-color: #FFF;
+		margin: 2px;
+		border-color: #bfbfbf;
+		padding-top: 4px;
+		padding-left: 4px;
+		padding-bottom: 4px;
+		list-style: none;	
+		-moz-border-radius: 7px;
+		border-radius: 7px;		
+	}
+		.search_box_all ul li .search_box_item {
+			z-index: 8;
+		}
+			.search_box_all ul li .search_box_item .search_box_item_name {
+				position: absolute;
+				display: inline;
+				padding-left: 10px;
+				padding-top: 10px					
+			}
+			
+			.search_box_all ul li img {
+				-moz-border-radius: 7px;
+				border-radius: 7px;		
+			}
+				

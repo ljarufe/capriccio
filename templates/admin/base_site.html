@@ -1,0 +1,24 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {% trans 'Administracion Capriccio' %}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">{% trans 'Capriccio - Admin' %}</h1>
+<div>
+    <h2>Manejador de Contenidos</h2>
+	<img src="{{ MEDIA_URL }}img/tienda_en_linea.png" style="padding:10px;"/>
+    <div style="width:180px;background-color:#B0550E;padding:0px;max-height:200px;z-index:9000;" id="containerNotifications">
+        <div id="alertasTitle" style="position:relative;background-color:#B0550E;color:#ffffff;padding:5px;font-family:Arial, Helvetica, sans-serif;cursor:pointer;font-size:10px;">
+            Alertas | Ver notificaciones
+        </div>
+        <div id="alertas" style="position:relative;background-color:#B0550E;color:#ffffff;padding:5px;font-family:Arial, Helvetica, sans-serif;cursor:pointer;color:#e5e5e5;">
+            <img src="/media/img/ajax-loader1.gif"/>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

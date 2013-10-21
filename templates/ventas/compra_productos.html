@@ -1,0 +1,147 @@
+{% extends "base.html"%}
+{% block head %}
+	<link rel="stylesheet" type="text/css" href="/media/search_box/search_box.css" />
+	<link rel="stylesheet" type="text/css" href="/media/css/compra-productos.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}lightbox/css/jquery.lightbox-0.5.css" media="screen" />
+	<script type='text/javascript'>
+		var num_paginas = {{ num_paginas }};
+		var tipo_cambio = {{ tipo_cambio }};
+	</script>
+	<script type="text/javascript" src="/media/search_box/jquery.search_box.js"></script>	
+	<script type="text/javascript" language="JavaScript" src="{{ MEDIA_URL }}lightbox/js/jquery.lightbox-0.5.js"></script>	
+	<!-- AQUI #######################-->
+	<script type='text/javascript'>
+	
+		$(document).ready(function(){
+			// Buscador
+			var database = new Array();
+			var i = 0;
+
+			{% for producto in todos_productos %}
+				database[i] = new Array(4);
+				database[i][0] = {{ producto.id }};
+				database[i][1] = "{{ producto.nombre }}";
+				database[i][2] = "{{ producto.descripcion.strip }}";
+				database[i][3] = "{{ producto.imagen.imagen.thumbnail }}";
+				i++;
+			{% endfor %}			
+
+			$('#ingreso').SearchBox(database, mostrar_busqueda);
+			
+			// Seleccion de la ciudad para las compras
+			{% if ciudad_sesion %}
+			{% else %}
+				seleccionar_ciudad();
+			{% endif %}
+			
+			{% if user.is_authenticated %}
+				sesion = true;
+			{% else %}
+				sesion = false;
+			{% endif %}
+			$('.producto-imagen a').lightBox({
+				txtImage:$(this).attr('title')
+			});
+		});
+	</script>
+	<script type="text/javascript" src='/media/js/ventas/compra_productos.js'></script>
+{% endblock %}
+
+{% block body %}
+	<!-- Contenedor Izquierda -->
+	<div id="cont_izq">		
+		<!-- Buscador de productos -->
+		<div class='buscador'>
+        	<p class="texto">Ingrese el nombre del producto que desea buscar:</p>
+			<input type='text' id='ingreso'>
+		</div>
+		<!-- menu de categorías -->
+		<div class="menu-categorias cuadro-izq">
+			<div ><h2>Categorias</h2></div>		
+			<ul>
+				{% for categoria in categorias %}
+					<li>
+						<a class='categoria-link' id="{{ categoria.id }}" href='' title='{{ categoria.descripcion }}' name="<li><h2>{{ categoria.nombre }}</h2></li><li id='descripcion-categoria'>{{ categoria.descripcion }}</li>">
+							{{ categoria.nombre }}
+						</a>
+					</li>
+				{% endfor %}
+				<li>
+					<a class='categoria-link' id="" href='' title='Todos los productos'>
+						Todos los productos
+					</a>
+				</li>
+			</ul>
+		</div>
+        <div id="tienda-linea" class="cuadro">
+            <p>Ingresa a nuestra tienda en línea para hacer tus compras:</p>
+            <a href="{% url tienda_en_linea %}"><img src="{{ MEDIA_URL }}/img/tienda_en_linea.png" border="0"/></a>
+        </div>
+	</div>
+	
+	<!-- Carrito de compras: estático-->
+	<!-- Carrito de compras: desplegable -->	
+	<!-- Contenedor Derecha -->
+	<div id="cont_der">
+		<!-- lista de productos -->
+		<div class="lista-productos">
+			<div class="categoria-lista">
+				<ul id='categoria-info'>
+				{% if categoria %}			
+					<li><h2>{{ categoria.nombre }}</h2></li>
+					<li id='descripcion-categoria'>{{ categoria.descripcion }}</li>			
+				{% else %}
+					<li><h2>Todos los productos</h2></li>
+				{% endif %}
+				</ul>
+			</div>
+			<ul id="items-productos">
+				{% for producto in productos.object_list %}
+					<li>
+						<!-- items del producto -->
+						<ul>
+							<li class='producto-nombre'>{{ producto.nombre }}</li>
+                            {% if producto.imagen %}
+                                {% if producto.compra_online %}
+							        <li class='producto-imagen'><a href="{{ producto.imagen.imagen.extra_thumbnails.medium }}" title="{{ producto.descripcion }}"><img class='imagen-prod' name="{{ producto.id }}" src="{{ producto.imagen.imagen.thumbnail }}" title='{{ producto.descripcion }}' /></a><p  style="font-size:0.6em;">Disponible en nuestra tienda en l&iacute;nea <img src="{{ MEDIA_URL }}img/check.gif" alt="" border="0"/></p></li>
+                                {% else %}
+                                    <li class='producto-imagen'><a href="{{ producto.imagen.imagen.extra_thumbnails.medium }}" title="{{ producto.descripcion }}"><img class='imagen-prod' name="{{ producto.id }}" src="{{ producto.imagen.imagen.thumbnail }}" title='{{ producto.descripcion }}' /></a><p style="font-size:0.6em;">Disponible en cualquiera de nuestras tiendas</p></li>
+                                {% endif %}
+                            {% else %}
+                                {% if producto.compra_online %}
+                                    <li class='producto-imagen'><img class='imagen-prod' name="{{ producto.id }}" src="{{ MEDIA_URL }}img/disabled.png" title='{{ producto.descripcion }}' /><p style="font-size:0.6em;">Disponible en nuestra tienda en l&iacute;nea <img src="{{ MEDIA_URL }}img/check.gif" alt="" border="0"/></p></li>
+                                {% else %}
+                                    <li class='producto-imagen'><img class='imagen-prod' name="{{ producto.id }}" src="{{ MEDIA_URL }}img/disabled.png" title='{{ producto.descripcion }}' /><p style="font-size:0.6em;">Disponible en cualquiera de nuestras tiendas</p></li>
+                                {% endif %}
+                            {% endif %}
+							<div class="clear"></div>
+						</ul>
+					</li>
+				{% endfor %}
+			</ul>		
+		</div>
+		
+		<!-- Paginador -->
+		<div class="paginador">
+		    <span class="step-links">
+		        {% if productos.has_previous %}
+		            <a href="?page={{ productos.previous_page_number }}">Anterior</a>
+		        {% endif %}
+		
+		        <span class="current">
+		            P&aacute;gina {{ productos.number }} de {{ productos.paginator.num_pages }}.
+		        </span>
+		
+		        {% if productos.has_next %}
+		            <a href="?page={{ productos.next_page_number }}">Siguiente</a>
+		        {% endif %}
+		    </span>
+		</div>
+		
+	</div>
+	<div style="display: none;">
+		<div id="resultado">
+		</div>
+	</div>
+
+{% endblock %}

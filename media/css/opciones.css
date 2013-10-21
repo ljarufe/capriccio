@@ -1,0 +1,86 @@
+#form_div {
+	margin-bottom: 10px;
+	width: 300px;
+	margin-right: 20px;
+	margin-left: 20px;
+}
+#form_table input, #form_table select{
+	border: 1px solid #BFBFBF;
+	color: #4D4D4D;
+	margin-bottom: 10px;
+	padding: 5px;
+	padding-left: 10px;
+	padding-left: 10px;
+	width: 190px;
+}
+
+#form_table th {
+	font-size: 0.8em;
+	font-weight: normal;
+	text-align: left;
+}
+
+#eliminar_cuenta input, #eliminar_cuenta select, #eliminar_cuenta button{
+	border: 1px solid #BFBFBF;
+	color: #4D4D4D;
+	margin-bottom: 10px;
+	padding: 5px 5px 5px 10px;
+	padding-left: 10px;
+	width: 130px;
+}
+
+#password input, #password select, #password button{
+	border: 1px solid #BFBFBF;
+	color: #4D4D4D;
+	margin-bottom: 10px;
+	padding: 5px 5px 5px 10px;
+	padding-left: 10px;
+	padding-left: 10px;
+	width: 130px;
+}
+
+#password button{
+	margin-left: 5px;
+}
+
+p {
+	margin-bottom: 10px;
+	font-size: 0.8em;
+	line-height: 18px;
+}
+#password {
+	margin-bottom: 20px;
+	width: 400px;
+	margin-left: 20px;
+}
+.error, .notificacion {
+	line-height: 34px;
+	font-size: 0.8em;
+	margin-right: 100px;
+}
+	#password #cambiar_password {
+		display: none;
+	}
+	
+	#password li {
+		list-style: none;
+		font-size: 0.8em;
+	}
+	
+	#validacion_password {
+	
+	}
+		#validacion_password #error-password {
+			display: none;
+		}
+		#validacion_password #sintaxis-password {
+			display: none;
+		}
+		#validacion_password #cambio-password {
+			display: none;
+		}
+#eliminar_cuenta {
+	margin-bottom: 10px;
+	width: 440px;
+	margin-left: 20px;
+}

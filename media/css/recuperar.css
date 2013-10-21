@@ -1,0 +1,27 @@
+#form_rec ul li {
+	list-style: none;
+}
+
+#form_rec p {
+	margin-bottom : 10px;
+}
+
+#form_rec ul .notificacion {
+	margin-bottom : 10px;	
+	color: #f00;
+}
+
+#form_rec ul li .nombre_opc {
+	width: 100px;
+	float: left;
+}
+
+#form_rec ul li input {
+	border: 1px solid #BFBFBF;
+	color: #4D4D4D;
+	margin-bottom: 10px;
+	padding: 5px 5px 5px 10px;
+	padding-left: 10px;
+	padding-left: 10px;
+	width: 130px;
+}

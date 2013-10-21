@@ -1,0 +1,48 @@
+body {
+	font-family: "Trebuchet MS", sans-serif;
+}
+.nivo-controlNav{
+	position: relative;
+	left:40%;
+}
+.nivo-controlNav a{
+	background: url(/media/img/bullets.png) no-repeat;
+	display: block;
+	float: left;
+	height: 10px;
+	margin-right: 3px;
+	text-indent: -9999px;
+	width: 10px;
+}
+.nivo-directionNav a{
+	background: url(/media/img/arrows.png) no-repeat;
+	display: block;
+	height: 30px;
+	text-indent: -9999px;
+	width: 30px;
+	cursor: pointer;
+	position: absolute;
+	top: 45%;
+	z-index: 99;
+}
+a.nivo-nextNav{
+	background-position: -30px 0px;
+	right: 15px;
+}
+#cont_der .arte{
+	border: 1px solid #ccc;
+	background: rgba(255,255,255,0.7);
+	margin-bottom:20px;
+	padding:10px;
+}
+#cont_der .ciudad{
+	border: 1px solid #ccc;
+	background: rgba(255,255,255,0.7);
+	margin-bottom:20px;
+	padding:10px;
+	position:relative;
+	float:left;
+	height:200px;
+	width:125px;
+	margin-right:15px;
+}

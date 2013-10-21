@@ -1,0 +1,330 @@
+#carrito-desplegable{
+	position: fixed;
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: #ffca46;
+	right: 0.5%;
+	bottom: 0%;
+	height: 25px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-topleft: 5px;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	z-index: 6;
+	opacity: 0.8;
+}
+	.span_carrito{
+		position: relative;
+		bottom: 5px;
+		color: #8e4710;	
+		font-size: 0.9em;
+		font-weight: bold;
+	}
+	#carrito-desplegable{
+		margin-bottom: -5px;
+	}
+
+#carrito{
+	z-index: 6;
+	padding: 15px;
+	border: solid 1px #C7A336;
+	cursor: hand;
+	background-color: #FFFCB1;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	opacity: 0.9;
+}
+	#carrito #cerrar-carrito{
+		position: absolute;
+		right: 5px;
+		top: 5px;
+	}
+	#carrito #titulo-carrito{
+		font-size: 1em;
+		color: #34211D;
+	}
+	#carrito #ciudad{
+		font-size: 1em;
+		color: #b0550e;
+		text-decoration: underline;
+		display: inline;
+		margin-right: 25px;
+	}
+	#carrito form{
+		margin-top: 10px;
+		color: #34211D;
+		font-size: 0.9em; 
+	}
+		#carrito form #form-comprar{
+			text-align: right;
+			margin-bottom: -5px;
+		}
+            #carrito form #form-comprar input{
+                font-size: 0.9em;
+                color: #524F42;
+                border: 1px solid #C7A336;
+                padding: 5px;
+            }
+		#carrito form .form-error {
+			color: red;
+			font-size: 0.9em;
+			display: none;
+			margin-bottom: 7px;					
+		}
+		#carrito form ul{
+			
+		}
+			#carrito form ul li{
+				list-style: none;
+				margin-bottom: 5px;
+			}				
+				#carrito form ul li input{
+					font-size: 0.9em;
+					color: #524F42;
+					border: 1px solid #C7A336;
+					padding: 5px;
+					/*-moz-border-radius-topright: 5px;
+					-moz-border-radius-topleft: 5px;
+					-moz-border-radius-bottomright: 5px;
+					-moz-border-radius-bottomleft: 5px;
+					border-top-right-radius: 5px;
+					border-top-left-radius: 5px;
+					border-bottom-right-radius: 5px;
+					border-bottom-left-radius: 5px;*/
+				}
+				#carrito form ul li #direccion{
+					width: 225px;
+				}
+				#carrito form ul li #fecha{
+					width: 100px;
+					margin-left: 19px;
+				}
+				#carrito form ul li .nombre-producto{
+					width: 150px;
+				}
+				#carrito form ul li .precio-producto{
+					text-align: right;
+					width: 70px;
+				}
+				#carrito form ul li .cantidad-producto{
+					text-align: right;
+					width: 40px;
+				}
+				#carrito form ul li #total-productos{
+					text-align: right;
+					width: 122px;
+				}
+				
+#calculo-total, #comprar, .remove-item{
+	background-color: #b0550e;
+	padding: 4px;
+	color: #FFFCB1;
+	border: 1px solid #b0550e;
+}
+
+#cont_izq {
+	margin-top: 70px !important;
+}
+
+.body{
+	background: #FFF url(../img/tienda.png) right top no-repeat;
+}
+
+#logo #img {
+	background: #FFF url(../img/tienda-logo.png) right top no-repeat;
+}
+
+.lista-productos{
+	/*position: absolute;
+	margin-left:230px;	
+	top: 265px;
+	left: 44%;*/
+	font-size: 15px;
+	margin-left: 10px;
+}
+	.lista-productos .categoria-lista{
+		
+	}
+		.lista-productos .categoria-lista #titulo-categoria, .lista-productos #titulo-categoria{
+			font-size: 1.3em;
+			color: #4d4d4d;
+			margin-left: 2%;
+			margin-bottom: 5px;
+			padding-bottom: 5px;
+			width: 300px;
+			font-variant: small-caps;
+			background-image: url(/media/img/barraNovedades.png);
+			background-position: bottom left;
+			background-repeat: no-repeat;
+		}
+		.lista-productos .categoria-lista #descripcion-categoria{
+			margin-left: 2%;
+			font-size: 0.9em;
+			text-align: justify;
+			margin-right: 15%;
+			color: #7f7f7f;
+		}
+		
+	.lista-productos ul{
+	}
+		.lista-productos ul li{
+			position: relative;
+			display: block;			
+		}
+			.lista-productos ul li ul{
+				position: relative;
+				display: inline-block;
+				text-align: center;
+				width: 170px;	
+				margin: 0px;
+				margin-bottom: 5px;
+				padding: 10px;
+				padding-top: 15px;
+				background: #fff;
+				/*-moz-border-radius-topright: 7px;
+				-moz-border-radius-topleft: 7px;
+				-moz-border-radius-bottomright: 7px;
+				-moz-border-radius-bottomleft: 7px;
+				border-top-right-radius: 7px;
+				border-top-left-radius: 7px;
+				border-bottom-right-radius: 7px;
+				border-bottom-left-radius: 7px;*/					
+			}
+				.lista-productos ul li ul li{
+					position: relative;
+					display: block;
+					margin-bottom: 5px;
+					color: #7f7f7f;
+				}
+				.lista-productos ul li ul .producto-nombre{
+					font-size: 0.9em;
+				}
+				.lista-productos ul li ul .producto-precio{
+					font-size: 0.8em;
+					text-align: left;
+				}
+				.lista-productos ul li ul .producto-cambio{
+					font-size: 0.8em;
+					text-align: left;
+				}
+				.lista-productos ul li ul li .precio-estilo {
+					float: left;
+					width: 115px;
+				}
+				.lista-productos ul li ul .producto-imagen img{
+					background: #ddd;
+					border: 1px solid #ccc;
+					padding: 3px;
+				}
+				.lista-productos ul li ul .producto-add{
+					
+				}
+				.lista-productos ul li ul .producto-add .add-carro,
+				.lista-productos .item-busqueda .add-carro{
+					background-color: #e5e5e5;;
+					padding: 4px;
+					color: #4d4d4d;
+					-moz-border-radius-topright: 7px;
+					-moz-border-radius-topleft: 7px;
+					-moz-border-radius-bottomright: 7px;
+					-moz-border-radius-bottomleft: 7px;
+					border-top-right-radius: 7px;
+					border-top-left-radius: 7px;
+					border-bottom-right-radius: 7px;
+					border-bottom-left-radius: 7px;
+				}
+				
+				.lista-productos #items-productos li {
+					display: inline-block;
+				
+				}
+				
+	.lista-productos .item-busqueda{
+		margin-top: 10px;
+		margin-left: 15px;
+		padding: 10px;
+		/*border: 1px solid #DDDDDD;*/
+		color: #7f7f7f;
+		text-align: center;
+		background-color: #fff;
+	}
+		.lista-productos .item-busqueda li{
+			display: block;
+			margin-bottom: 10px;
+		}
+		.lista-productos .item-busqueda #item-nombre{
+			font-size: 1.2em;			
+			font-weight: 400;
+			display: block;	
+		}
+		.lista-productos .item-busqueda #item-precio{
+			font-size: 0.9em;			
+		}
+		#img-find {
+			padding: 5px;
+			border: solid 1px #CCC;
+			background-color: #EEE;
+		}
+
+.paginador{
+	/*position: absolute;*/
+	/*top: 270px;
+	left: 71%;*/
+	font-size: 0.9em;
+	color: #7f7f7f;
+	width:250px;
+}
+	.paginador a:link { color: #666;}
+	.paginador a:visited { color: #666; }
+	.paginador a:hover { text-decoration: none; }
+	.paginador a:active { color: #666; }
+
+	.paginador .paginas{
+		display: inline;	
+	}
+	.paginador .paginas .num_pagina{
+		display: inline;
+	}
+.buscador .texto {
+	font-size: 11px;
+	color: #808080;
+	padding: 7px 10px 5px;
+}
+
+.buscador{
+	background: url(../img/busqueda.png);
+	width: 210px;
+	height: 70px;
+	padding: 0px;
+}
+
+.menu-categorias{
+	/*position: relative;
+	margin-top: 15px;
+	margin-left: 20px;*/
+}
+	.menu-categorias .categoria{
+		font-size: 1.1em;
+		color: white;
+		padding: 10px;					
+	}
+	.menu-categorias ul{
+		margin-left: 10px;
+	}
+		.menu-categorias ul li{
+			list-style: none;
+			margin-bottom: 5px;
+			font-size: 0.9em;
+			list-style-position: inside;
+			list-style-type: square;
+			margin-top: 5px;
+		}
+		.menu-categorias ul li a:link { color: #666;  text-decoration: none;}
+		.menu-categorias ul li a:visited { color: #666; text-decoration: none;}
+		.menu-categorias ul li a:hover {text-decoration: underline;}
+		.menu-categorias ul li a:active { color: #666; text-decoration: none; }

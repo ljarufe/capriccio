@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block head %}
+
+	<link rel="stylesheet" type="text/css" href="/media/css/registro.css" media="screen" />
+	<script type="text/javascript" src="/media/js/clientes/registro.js"></script>		
+	
+{% endblock %}
+
+{% block body %}
+	<div id="cont_izq"></div>
+	<div id="cont_der">
+	<!-- Formulario de registro -->
+	<div class="form">
+		
+		
+		<h1>Regístrate</h1>
+		<div id="texto">Llena tus datos correctamente.</div>
+		<form method="post" action="">
+			<table>
+				{{ cliente_form.as_table }}
+				<tr id='tr-error'><th></th>
+				<td>
+					<span class="error" id='password-error-match'>
+						Las contraseñas no coinciden, deben ser iguales.
+					</span>					
+					<span class="error" id='password-error-null'>
+						Debe ingresar una contraseña.
+					</span>
+					<span class="error" id='password-error-length'>
+						La contraseña debe contener al menos 6 dígitos.
+					</span>
+					<!-- TODO: No se deben permitir ciertos dígitos para hacer comprobaciones -->
+					<span class="error" id="password-error-sitaxis">
+						La contraseña no puede contener estos caracteres: ...
+					</span>
+				</td></tr>
+				<tr>
+					<th><label for="password1">Contraseña: </label></th>
+				    <td><input type="password" name="password1" id="password1" /></td>
+				</tr>
+				<tr>
+					<th><label for="password2">Contraseña: </label></th>
+				    <td><input type="password" name="password2" id="password2" /></td>
+				</tr>				
+				{{ direccion_form.as_table }}
+				<tr><th></th>
+					<td><input type="submit" value="Registrarse" id="submit"></td>
+				</tr>				
+			</table>
+		</form>
+		
+		<!-- Notificaciones de js -->
+		<div class='mensajes'>
+			<div id='email-disponible' class='email-mensajes'>
+				Este e-mail se encuentra disponible.
+			</div>
+			<div id='email-nodisponible' class='email-mensajes'>
+				Este e-mail ya está siendo usado por otra persona.
+			</div>
+			<div id='email-notificacion' class='email-mensajes'>
+				Su e-mail lo identificará, y sólo podrá crear una cuenta con él.
+			</div>
+			<div id='password-notificacion'>
+				Ingrese su contraseña en ambos campos, por lo menos de 6 caracteres.
+			</div>
+		</div>
+	</div>
+	</div>
+{% endblock %}

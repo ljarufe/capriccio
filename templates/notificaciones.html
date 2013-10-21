@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Notificaciones | {{ user }}</title>
+		<script type="text/javascript" language="JavaScript" src="/media/js/jquery-1.3.2.js"></script>
+		<script language="JavaScript">
+			$(document).ready(function(){
+				
+				var i = 0;
+				var iNuevo;
+                setInterval(function(){
+                    $.getJSON("/notitas",{action:2},function(data){
+                        
+                        
+                            var html = data;
+							var x = html.cuenta;
+                            $("#notified").html(html.notif);
+                            if (x == 0){
+								$("#alertas").text("Sin Ocurrencias" + "(" + x + ")");
+								i = html.cuenta;
+								var despliegue = $("#notified").css("display");
+				
+								if(despliegue == "block"){
+									$("#notified").css("display","none");
+								}
+								$.ajax({
+									type:"POST",
+									url:"/media/js/eventos_dinamicos.js",
+									dataType:"script" 
+									
+								});
+                            }
+                            else if(x > i){
+                                $("#alertas").text("Nueva Compra" + "(" + x + ")");
+								
+                                i = x; 
+								var despliegue = $("#notified").css("display");
+								
+								if(despliegue == "none"){
+									$("#notified").css("display","block");
+								}
+								$.ajax({
+									type:"POST",
+									url:"/media/js/eventos_dinamicos.js",
+									dataType:"script" 
+									
+								});
+								
+                            }
+							else if(x == i){
+								$("#alertas").text("Sin Ocurrencias" + "(" + x + ")");
+								
+								$.ajax({
+									type:"POST",
+									url:"/media/js/eventos_dinamicos.js",
+									dataType:"script" 
+									
+								});
+							}
+							else{
+								i = x;
+								$.ajax({
+									type:"POST",
+									url:"/media/js/eventos_dinamicos.js",
+									dataType:"script" 
+									
+								});
+							}
+                            
+                        
+                    })
+                }, 5000)
+				$("#alertas").click(function(event){
+					$("#notified").slideToggle("fast");
+					return false;
+					event.preventDefault();
+				});
+				$("#alertasTitle").click(function(){
+					$("#alertas").trigger("click");
+				});
+				
+			})
+		</script>
+	</head>
+	<body>
+		<div id="cont_izq"></div>
+		<div id="cont_der">
+		{{ user }}
+		<div style="position:fixed;right:20px;width:180px;bottom:0px;background-color:#bfbfbf;padding:10px;max-height:600px;overflow:hidden;">
+		<div id="alertasTitle" style="position:relative;background-color:#4d4d4d;color:#ffffff;padding:5px;font-family:Arial, Helvetica, sans-serif;cursor:pointer;font-size:10px;">Alertas</div>
+		<div id="alertas" style="position:relative;background-color:#4d4d4d;color:#ffffff;padding:5px;font-family:Arial, Helvetica, sans-serif;cursor:pointer;color:#ff1414;"><img src="/media/img/ajax-loader1.gif"/></div>
+		<div id="notified" style="position:relative;padding:10px;font-family:Arial, Helvetica, sans-serif;font-size:10px;color:#a52a2a;"></div>
+		
+		</div>
+		</div>
+	</body>
+</html>

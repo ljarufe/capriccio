@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Untitled Document</title>
+	</head>
+	<body>
+		<div style="background-color:#4d4d4d;width:100%;height:50px;padding:5px;"><img src="http://capriccioperu.com/media/img/logo_t.gif"></div>
+		<div style="padding:0 0 0 10px;">
+		<h1>Usted ha recibido la siguiente notificacion de {{ current_site|safe }}:</h1>
+		<div id="titulo" style="font-family:Arial Narrow;font-size:medium;">{{ message }} | {{ user }}</div>
+		<div style="font-family:Arial Narrow;font-size:medium;">{{ cliente }} | {{ compra }}</div>
+                {% if producto %}
+                  <div>{{ producto }}</div>
+                {% endif %}
+                {% if personalizado %}
+                      <div style="font-family:Arial Narrow;font-size:medium;">{{ personalizado }}</div>
+                {% endif %}
+		<p>Para poder ver las notificaciones recibidas por sus compras por favor vaya a esta direccion {{ notices_url|safe }}.</p>
+		</div>
+	</body>
+</html>

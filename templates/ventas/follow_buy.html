@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/media/css/tienda_linea.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="/media/css/registro.css" media="screen" />
+    <style type="text/css">
+    #regme{
+        padding:5px;
+        background:#ffffff;
+        font-size:12px;
+        margin-top:30px;
+        color:#555;
+        -moz-border-radius:5px;
+        -webkit-border-radius:5px;
+        -webkit-box-shadow:0px 0px 8px #333;
+        -moz-box-shadow:0px 0px 8px #333;
+        z-index:10000;
+    }
+        #logme{
+        padding:5px;
+        background:#ffffff;
+        position:absolute;
+        font-size:12px;
+        margin-top:30px;
+        color:#555;
+        -moz-border-radius:5px;
+        -webkit-border-radius:5px;
+        -webkit-box-shadow:0px 0px 8px #333;
+        -moz-box-shadow:0px 0px 8px #333;
+        z-index:10000;
+}
+#logme .input {
+	padding:4px;
+	margin:3px;
+	border:1px solid #CCC;
+}
+#logme .boton_grande {
+	padding:5px 10px !important;
+}
+    </style>
+	<script type="text/javascript" src="/media/js/clientes/registro.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#log").click(function(e){
+                var nombre = $("#user").val();
+                var pass = $("#pass").val();
+                $("#logme").html(" ");
+                img = "<img src='{{ MEDIA_URL }}loaders/ajax-loader.gif'/>...Procesando!!!";
+                $("#logme").append(img);
+                url = "/acceso/compra/";
+                $.post(url,{usuario:nombre,password:pass},function(data){
+                    $("#logme").html(" ");
+                    $("#logme").append(data);
+                })
+                return false;
+                e.preventDefault();
+            });
+            $("#submit").click(function(e){
+                var nombres = $("#id_nombres").val();
+                var apellidos = $("#id_apellidos").val();
+                var email = $("#id_email").val();
+                var dni = $("#id_dni").val();
+                var telefono = $("#id_telefono").val();
+                var password2 = $("#password2").val();
+                var lugar = $("#id_lugar").val();
+                var ciudad = $("#id_ciudad").val();
+                $("#regme").html(" ");
+                $(".mensajes").html(" ");
+                img = "<img src='{{ MEDIA_URL }}loaders/ajax-loader.gif'/>...Procesando!!!";
+                $("#regme").append(img);
+                url = '/clientes/registro_compra/';
+                $.post(url,{nombres:nombres,apellidos:apellidos,email:email,dni:dni,telefono:telefono,password2:password2,lugar:lugar,ciudad:ciudad},function(data){
+                    $("#regme").html(" ");
+                    $("#regme").append(data);
+                })
+                return false;
+                e.preventDefault();
+            })
+        })
+    </script>
+{% endblock %}
+
+{% block body %}
+	<div id="cont_izq">
+    <h2>Si no te encuentras registrado reg&iacute;strate, si ya lo est&aacute;s accede a tu cuenta desde aqu&iacute;</h2>
+
+        <div id="logme">
+            <form method='post' action=''>
+                <table>
+                    <tr>
+                        <td>E-mail:</td>
+                        <td><input name="usuario" type="text" class="input" id="user"/></td>
+                    </tr>
+                    <tr>
+                        <td>Contrase&ntilde;a:</td>
+                        <td><input name="password" type="password" class="input" id="pass"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center"><input type="submit" value="Entrar" class="boton_grande" id="log"/></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>        
+	<div id="cont_der">
+	<!-- Formulario de registro -->
+	<div class="form">
+        <div id="regme">
+            <h1>Registra tus datos para seguir comprando!!!</h1>
+            <h2>Llena tus datos correctamente</h2>
+		<form method="post" action="/clientes/registro/">
+			<table>
+				{{ cliente_form.as_table }}
+				<tr id='tr-error'><th></th>
+				<td>
+					<span class="error" id='password-error-match'>
+						Las contraseñas no coinciden, deben ser iguales.
+					</span>
+					<span class="error" id='password-error-null'>
+						Debe ingresar una contraseña.
+					</span>
+					<span class="error" id='password-error-length'>
+						La contraseña debe contener al menos 6 dígitos.
+					</span>
+					<!-- TODO: No se deben permitir ciertos dígitos para hacer comprobaciones -->
+					<span class="error" id="password-error-sitaxis">
+						La contraseña no puede contener estos caracteres: ...
+					</span>
+				</td></tr>
+				<tr>
+					<th><label for="password1">Contraseña: </label></th>
+				    <td><input type="password" name="password1" id="password1" /></td>
+				</tr>
+				<tr>
+					<th><label for="password2">Contraseña: </label></th>
+				    <td><input type="password" name="password2" id="password2" /></td>
+				</tr>
+				{{ direccion_form.as_table }}
+				<tr><th></th>
+					<td><input type="submit" value="Registrarse" id="submit"></td>
+				</tr>
+			</table>
+		</form>
+        </div>
+		<!-- Notificaciones de js -->
+		<div class='mensajes'>
+			<div id='email-disponible' class='email-mensajes'>
+				Este e-mail se encuentra disponible.
+			</div>
+			<div id='email-nodisponible' class='email-mensajes'>
+				Este e-mail ya está siendo usado por otra persona.
+			</div>
+			<div id='email-notificacion' class='email-mensajes'>
+				Su e-mail lo identificará, y sólo podrá crear una cuenta con él.
+			</div>
+			<div id='password-notificacion'>
+				Ingrese su contraseña en ambos campos, por lo menos de 6 caracteres.
+			</div>
+		</div>
+	</div>
+	</div>
+{% endblock %}

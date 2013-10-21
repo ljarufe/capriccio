@@ -1,0 +1,56 @@
+{% extends "bienvenida_base.html"%}
+{% load commontags %}
+
+{% block head %}
+
+	<link rel="stylesheet" type="text/css" href="/media/css/inicio.css" media="screen" />
+	<script type="text/javascript" language="JavaScript" src="/media/ui/js/jquery-ui-1.8.4.custom.min.js"></script>
+	<script type="text/javascript" language="JavaScript" src="/media/instant/instant.js"></script>
+	<script type='text/javascript' src='/media/js/common/inicio.js'></script>
+	<script type='text/javascript'>
+		var num_ban = {{ banners|length }};
+	</script>
+
+{% endblock %}
+
+{% block body %}
+
+	<!-- Contenedor Izquierda -->
+	<div id="cont_izq" style="display:none;" >
+		<!-- Login de usuario -->
+
+		<!--#TODO:banner animado -->
+	</div>
+
+	<!-- Contenedor Centro -->
+    <div id="cont_centro">
+		<div id="banner">
+        	<div id="titulo">
+            	<div id="titulo-texto">{{ first.nombre }}</div>
+                <div id="botonera">
+                    <div id="ant" class="flecha"></div>
+                    <div id="sig" class="flecha"></div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+        	<div id="banner-imagen">
+                <a href=""><div class="imagen"><img src="media/img/banner.gif" /></div></a>
+            </div>
+
+            <script type="text/javascript">
+				var urls = new Array();
+				var titulos = new Array();
+				{% for j in ini %}
+					urls.push("{{ j.imagen.extra_thumbnails.detalle }}");
+					titulos.push("{{ j.nombre }}");
+				{% endfor %}
+				banners(urls,titulos);
+			</script>
+		</div>
+        <div id="vinculos">
+            <h1>Nuestra p&aacute;gina se encuentra en mantenimiento, vuelve pronto!!!</h1>
+            <h2>Muchas gracias.<br/> Capriccio Tienda en L&iacute;nea</h2>
+        </div>
+    </div>
+{% endblock %}

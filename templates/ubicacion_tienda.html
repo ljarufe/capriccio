@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>{{ title }}</title>
+		<style type="text/css">
+ @import url("http://www.google.com/uds/css/gsearch.css");
+ @import url("http://www.google.com/uds/solutions/localsearch/gmlocalsearch.css");
+ }
+</style> 
+<script type="text/javascript" src="/media/js/jquery-1.4.2.min.js"></script>
+<script 
+src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=true&amp;key=ABQIAAAAMRdj9lILtQvXkiEUNZPsEBRaJ7O0gIMKduotvhyPN4YrSrlYZhTqAgSnxFz7ruq9Yt4cc8LUJzyEww" type="text/javascript"></script>
+<script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0" type="text/javascript"></script>
+<script src="http://www.google.com/uds/solutions/localsearch/gmlocalsearch.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi?key=ABQIAAAAMRdj9lILtQvXkiEUNZPsEBRaJ7O0gIMKduotvhyPN4YrSrlYZhTqAgSnxFz7ruq9Yt4cc8LUJzyEww"></script>
+<script type="text/javascript" src="/media/js/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript">
+			function load(){
+				if (GBrowserIsCompatible()) {
+					var map = new GMap2(document.getElementById("map"));
+					map.setCenter(new GLatLng(-16.385532,-71.541681), 13);
+					map.addControl(new GMapTypeControl());
+        			map.addControl(new GLargeMapControl());
+        			map.addControl(new GScaleControl());
+        			map.addControl(new GOverviewMapControl());
+					//var searcher = new google.search.LocalSearch();
+					//var searchControl = new google.search.SearchControl();
+					//searcher.setCenterPoint(map);
+					//searchControl.addSearcher(searcher)
+					map.addControl(new google.maps.LocalSearch(),new GControlPosition(G_ANCHOR_BOTTOM_LEFT,new GSize(10,20)));
+					var punto = new GLatLng(-16.385532,-71.541681);
+					
+					var baseIcon = new GIcon(G_DEFAULT_ICON);
+					var marker = new GMarker(punto,{icon:baseIcon,draggable:true});
+					map.addOverlay(marker);
+					marker.enableDragging();
+					GEvent.addListener(marker, "dragstart", function() {
+  						map.closeInfoWindow();
+  					});
+
+					GEvent.addListener(marker, "dragend", function() {
+						 var location = marker.getPoint().toUrlValue();
+						 var array = location.split(",");
+ 						 document.getElementById("lat").value=array[0];
+						 document.getElementById("lng").value=array[1];
+						 map.openInfoWindow(new GLatLng(array[0],array[1]),document.createTextNode(array[0]+" , "+array[1]));
+ 					 });
+
+					
+				}
+			}
+		</script>
+	</head>
+    <body onload="load()">
+    <div>
+        <div>
+            <form action="/nueva/ubicacion" method="post">
+                <input type="text" name="latitud" id="lat"/><input type="text" name="longitud" id="lng"/>
+                <div id="map" style="position:relative;width:600px;height:400px;">
+                </div>
+                <p><input type="submit" value="Grabar" class="default" name="_save"> | <a href="javascript:window.close()">Cancel</a></p>
+            </form>
+        </div>
+    </div>
+    </body>
+</html>

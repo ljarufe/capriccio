@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+
+	<link rel="stylesheet" type="text/css" href="/media/css/equipo_trabajo">
+	<script type="text/javascript" src="/media/js/empresa/equipo_trabajo">
+	
+{% endblock %}
+
+{% block body %}
+
+	<div id='fotos_equipo'>
+		<ul>
+		{% for foto in fotos %}
+			<ul>
+				<li>{{ foto.titulo }}</li>
+				<li><img src='{{ foto.imagen.url }}' alt='{{ foto.imagen.titulo }}' title='{{ foto.imagen.titulo }}'></li>
+			</ul>
+		{% endfor %}
+		</ul>
+	</div>
+	
+{% endblock %}
+
+

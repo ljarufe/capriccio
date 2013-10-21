@@ -1,0 +1,5 @@
+{% for categoria in categorias %}
+	<li>
+		<a href="{% url productos categoria.id %}" title='{{ categoria.descripcion }}'>{{ categoria.nombre|capfirst }}</a>
+	</li>
+{% endfor %}

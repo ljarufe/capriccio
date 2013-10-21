@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+	<link rel="stylesheet" type="text/css" href="/media/css/tiendas.css" media="screen" />		
+	<script src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAAMRdj9lILtQvXkiEUNZPsEBRaJ7O0gIMKduotvhyPN4YrSrlYZhTqAgSnxFz7ruq9Yt4cc8LUJzyEww&sensor=false" type="text/javascript">
+	</script>
+
+    <script type="text/javascript" src='/media/js/empresa/tiendas.js'></script>
+    
+    <script type='text/javascript'>
+	    var latitud = {{ tienda.ubicacion.latitud }};
+	    var longitud = {{ tienda.ubicacion.longitud }};
+	    var nombre = "{{ tienda.nombre_corto }}";
+	    var direccion = "{{ tienda.direccion }}";
+	</script>    
+    
+
+{% endblock %}
+
+{% block body %}
+
+	<!-- Contenedor Izquierda -->
+	<div id="cont_izq">
+		<div class='lista-tiendas cuadro-izq'>
+			<h2>Nuestras tiendas</h2>
+			<ul>
+			{% for tien in tiendas %}
+				<li><a href='{% url detalle_tienda tien.id %}'>{{ tien.nombre_corto }}</a></li> 
+			{% endfor %}
+			</ul>
+		</div>
+		<div id="tienda-linea" class="cuadro">
+            	<p>Ingresa a nuestra tienda en línea:</p>
+                <a href="{% url tienda_en_linea %}"><img src="/media/img/tienda_en_linea.png" /></a>
+            </div>
+
+	</div>
+	
+	<!-- Contenedor Derecha -->
+	<div id="cont_der">
+		<h3>Contacto</h3>
+		<div class='tienda'>
+		{% if tienda %}
+			<h2>{{ tienda.nombre_corto }}</h2>
+			<ul>		
+				<li><span class="titulo">Telefono: </span>{{ tienda.telefono }}</li>
+				<li><span class="titulo">Direcci&oacute;n: </span>{{ tienda.direccion }}</li>
+				<li><span class="titulo">Donde encontrarnos: </span></li>
+				<li>
+					<div id="map"></div>
+				</li>
+				<li id="link-tienda">
+					<a href='{% url detalle_tienda tienda.id %}'>Ver detalles de la tienda</a>
+				</li>
+			</ul>		
+		{% endif %}
+			{% if msg %}
+				<h3>{{ msg }}</h3>
+			{% else %}
+				<h3>Cont&aacute;ctese con nosotros</h3>
+			{% endif %}	
+			
+			<form id="form_contacto" name="form_contacto" method="post" action="/empresa/contact/">{% csrf_token %}
+			<table border="0" style="margin-left:40px;">
+				<tr>
+					<td>Nombre:</td>
+					<td><input type="text" style="width:300px; padding:3px;" name="nombre"></td>
+				</tr>
+				<tr>
+					<td>E-mail:</td>
+					<td><input type="text" style="width:300px; padding:3px;" name="email"></td>
+				</tr>
+				<tr>
+					<td valign="top">Mensaje:</td>
+					<td><textarea style=" height:100px; width:300px; padding:3px;" name="mensaje"></textarea></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td align="center"><input type="submit" value="Enviar mensaje" style="padding:5px;" id="submit"/></td>
+				</tr>
+			</table>
+			</form>
+		</div>
+        <div id="phone">
+            <div class="icon"><img src="{{ MEDIA_URL }}img/telephone.png" alt="phone" /></div><div class="text">Llama desde cualquier parte del Per&uacute; al <br/><b>0800 16389</b></div>
+        </div>
+	</div>
+
+	
+{% endblock %}

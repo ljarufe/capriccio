@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ LANGUAGE_CODE }}" xml:lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+<title>{% block title %}{% endblock %}</title>
+<link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% load adminmedia %}/media/css/base.css{% endblock %}" />
+<style type="text/css">
+ @import url("http://www.google.com/uds/css/gsearch.css");
+ @import url("http://www.google.com/uds/solutions/localsearch/gmlocalsearch.css");
+ }
+</style> 
+<script type="text/javascript" src="/media/js/jquery-1.4.2.min.js"></script>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=true&amp;key=ABQIAAAAMRdj9lILtQvXkiEUNZPsEBRaJ7O0gIMKduotvhyPN4YrSrlYZhTqAgSnxFz7ruq9Yt4cc8LUJzyEww" type="text/javascript"></script>
+<script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0" type="text/javascript"></script>
+<script src="http://www.google.com/uds/solutions/localsearch/gmlocalsearch.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi?key=ABQIAAAAMRdj9lILtQvXkiEUNZPsEBRaJ7O0gIMKduotvhyPN4YrSrlYZhTqAgSnxFz7ruq9Yt4cc8LUJzyEww"></script> 
+{% block extrastyle %}{% endblock %}
+<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="{% block stylesheet_ie %}{% load adminmedia %}{% admin_media_prefix %}css/ie.css{% endblock %}" /><![endif]-->
+{% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% admin_media_prefix %}css/rtl.css{% endblock %}" />{% endif %}
+{% block extrahead %}{% endblock %}
+{% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+<script type="text/javascript">
+	$(document).ready(function(){
+				$("#notified").hide();
+				$("#all").click(function(e){
+					$(".check").attr("checked","checked");
+					return false;
+					e.preventDefault();
+				});	
+				$("#none").click(function(e){
+					$(".check").attr("checked","");
+					return false;
+					e.preventDefault();
+				});
+		//funcionamiento de panel notificaciones
+				var i = 0;
+				var iNuevo;
+				$("#containerNotifications").animate({
+					"width":"150",
+					"top":"40"
+				},200);
+                setInterval(function(){
+                    $.getJSON("/notitas",{action:2},function(data){
+                        
+                        
+                            var html = data;
+							var x = html.cuenta;
+							//$("#notified").hide();
+                            //$("#notified").html(html.notif);
+							$("#containerNotifications").animate({
+								"width":"180"
+							});
+                            if (x == 0){
+								$("#containerNotifications").animate({
+									"top":"75"
+								},1);
+								$("#alertas").css("color","#e49955");
+								$("#alertas").text("Ocurrencias" + "(" + x + ")");
+								document.title = "Ocurrencias" + "(" + x + ") | Capriccio-Admin";
+								i = html.cuenta;
+								//var despliegue = $("#notified").css("display");
+				
+								//if(despliegue == "block"){
+								//	$("#notified").css("display","none");
+								//}
+								$.ajax({
+									type:"POST",
+									url:"/media/js/eventos_dinamicos.js",
+									dataType:"script" 
+									
+								});
+                            }
+                            else if(x > i){
+								a = x - i;
+								$("#containerNotifications").animate({
+									"top":"75"
+								},1);
+								$("#alertas").css("color","#f5851f")
+                                $("#alertas").text("Nueva Compra" + "(" + a + ")");
+								document.title = "Nueva Compra" + "(" + a + ") | Capriccio-Admin";
+                                i = x; 
+								//var despliegue = $("#notified").css("display");
+								
+								//if(despliegue == "none"){
+								//	$("#notified").hide();
+								//	$("#notified").css("display","block");
+								//}
+								$.ajax({
+									type:"POST",
+									url:"/media/js/eventos_dinamicos.js",
+									dataType:"script" 
+									
+								});
+								
+                            }
+							else if(x == i){
+								$("#containerNotifications").animate({
+									"top":"75"
+								},1);
+								$("#alertas").css("color","#e49955");
+								$("#alertas").text("Ocurrencias" + "(" + x + ")");
+								document.title = "Ocurrencias" + "(" + x + ") | Capriccio-Admin";
+								$.ajax({
+									type:"POST",
+									url:"/media/js/eventos_dinamicos.js",
+									dataType:"script" 
+									
+								});
+							}
+							else{
+								i = x;
+								$("#containerNotifications").animate({
+									"top":"75"
+								},1);
+								document.title = "Ocurrencias" + "(" + i + ") | Capriccio-Admin";
+								$.ajax({
+									type:"POST",
+									url:"/media/js/eventos_dinamicos.js",
+									dataType:"script" 
+									
+								});
+							}
+                            
+                        
+                    })
+                }, 3500)
+				$("#alertas").click(function(event){
+					$.getJSON("/notitas",{action:2},function(data){
+						var html = data;
+						var despliegue = $("#notified").css("display");
+						if(despliegue == "block"){
+							$("#notified").fadeOut();
+						}
+						else{
+							$("#notified").fadeIn();
+							$("#notified").html(html.notif);							
+						}
+					})
+					return false;
+					event.preventDefault();
+				});
+				$("#alertasTitle").click(function(){
+					$("#alertas").trigger("click");
+				});
+				$("textarea").markItUp(mySettings);
+	})
+	</script>
+<script type="text/javascript">
+			function load(){
+				if (GBrowserIsCompatible()) {
+					var map = new GMap2(document.getElementById("map"));
+					map.setCenter(new GLatLng(-16.385532,-71.541681), 13);
+					map.addControl(new GMapTypeControl());
+        			map.addControl(new GLargeMapControl());
+        			map.addControl(new GScaleControl());
+        			map.addControl(new GOverviewMapControl());
+					//var searcher = new google.search.LocalSearch();
+					//var searchControl = new google.search.SearchControl();
+					//searcher.setCenterPoint(map);
+					//searchControl.addSearcher(searcher)
+					map.addControl(new google.maps.LocalSearch(),new GControlPosition(G_ANCHOR_BOTTOM_LEFT,new GSize(10,20)));
+					var punto = new GLatLng(-16.385532,-71.541681);
+					
+					var baseIcon = new GIcon(G_DEFAULT_ICON);
+					var marker = new GMarker(punto,{icon:baseIcon,draggable:true});
+					map.addOverlay(marker);
+					marker.enableDragging();
+					GEvent.addListener(marker, "dragstart", function() {
+  						map.closeInfoWindow();
+  					});
+
+					GEvent.addListener(marker, "dragend", function() {
+						 var location = marker.getPoint().toUrlValue();
+						 var array = location.split(",");
+ 						 document.getElementById("lat").value=array[0];
+						 document.getElementById("lng").value=array[1];
+						 map.openInfoWindow(new GLatLng(array[0],array[1]),document.createTextNode(array[0]+" , "+array[1]));
+ 					 });
+
+					
+				}
+			}
+		</script>
+</head>
+{% load i18n %}
+
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}" onload="load()">
+
+<!-- Container -->
+<div id="container">
+
+    {% if not is_popup %}
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+        {% block branding %}{% endblock %}
+        </div>
+        {% if user.is_active and user.is_staff %}
+        <div id="user-tools">
+            {% trans 'Welcome,' %}
+            <strong>{% firstof user.first_name user.username %}</strong>.
+            {% block userlinks %}
+                {% url django-admindocs-docroot as docsroot %}
+                
+                {% url admin:password_change as password_change_url %}
+                {% if password_change_url %}
+                    <a href="{{ password_change_url }}">
+                {% else %}
+                    <a href="{{ root_path }}password_change/">
+                {% endif %}
+                {% trans 'Change password' %}</a> /
+                {% url admin:logout as logout_url %}
+                {% if logout_url %}
+                    <a href="{{ logout_url }}">
+                {% else %}
+                    <a href="{{ root_path }}logout/">
+                {% endif %}
+                {% trans 'Log out' %}</a>
+            {% endblock %}
+        </div>
+        {% endif %}
+        {% block nav-global %}{% endblock %}
+    </div>
+    <!-- END Header -->
+    {% block breadcrumbs %}<div class="breadcrumbs"><a href="/">{% trans 'Home' %}</a>{% if title %} &rsaquo; {{ title }}{% endif %}</div>{% endblock %}
+    {% endif %}
+
+        {% if messages %}
+        <ul class="messagelist">{% for message in messages %}<li>{{ message }}</li>{% endfor %}</ul>
+        {% endif %}
+
+    <!-- Content -->
+    <div id="content" class="{% block coltype %}colM{% endblock %}">
+        {% block pretitle %}{% endblock %}
+        {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
+        {% block content %}
+        {% block object-tools %}{% endblock %}
+        {{ content }}
+        {% endblock %}
+        {% block sidebar %}{% endblock %}
+        <br class="clear" />
+    </div>
+    <!-- END Content -->
+
+    {% block footer %}<div id="footer"></div>{% endblock %}
+</div>
+<div id="notified" style="position:absolute;top:175px;left:0px;padding:10px;font-family:Arial, Helvetica, sans-serif;font-size:10px;color:#a52a2a;background-color:#fff;margin-top:5px;width:100%;height:auto;">
+</div>
+<!-- END Container -->
+		
+</body>
+</html>

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+	{% if card == "Y" %}
+		<div style="background:url('/media/img/izq_back_img.png') no-repeat scroll left top #8C3F40;float:left;margin-top:10px;padding:20px;position:relative;top:-250px;width:220px;">
+		<div style="background:url('/media/img/izq_cuadro_brillo.png') repeat-x scroll center top rgba(255, 255, 255, 0.8);margin-bottom:10px;padding:10px;">
+		<div><h2>Compra satisfactoria</h2></div>
+		<div>N° de Compra :{{ order }}</div>
+		<div>N° de orden 2checkout :{{ number }}</div>
+		<div>Total :{{ amount }}</div>
+		</div>
+		</div>
+		{% if prod %}
+		<div style="background:url('/media/img/der_back_img.png') repeat-x scroll left top #EFEFEF;float:left;margin:10px;padding:10px;position:relative;top:-200px;width:655px;">
+		<h2>Productos Comprados</h2>
+		<ul>
+		{% for i in prod %}
+		<li style="display:inline-block;position:relative;">
+			<ul style="background:none repeat scroll 0 0 #FFFFFF;border:1px solid #BFBFBF;display:inline-block;margin:15px 0 5px 15px;padding:15px 10px 10px;position:relative;text-align:center;width:170px;">
+				<li style="color:#7F7F7F;display:block;margin-bottom:5px;position:relative;"><div><label>Cantidad :</label>{{ i.cantidad }}</div></li>	
+				<li style="color:#7F7F7F;display:block;margin-bottom:5px;position:relative;"><div>{{ i.producto.img_producto|safe }}</div></li>
+			</ul>
+		</li>
+		{% endfor %}
+		</ul>
+		</div>
+		{% endif %}
+		{% if personalizado %}
+			<div style="background:url('/media/img/der_back_img.png') repeat-x scroll left top #EFEFEF;float:left;margin:10px;padding:10px;position:relative;top:-200px;width:655px;">
+				<h2>Productos Comprados</h2>
+				<ul>
+				<li style="display:inline-block;position:relative;">
+					<ul style="background:none repeat scroll 0 0 #FFFFFF;border:1px solid #BFBFBF;display:inline-block;margin:15px 0 5px 15px;padding:15px 10px 10px;position:relative;text-align:center;width:170px;">
+						<li style="color:#7F7F7F;display:block;margin-bottom:5px;position:relative;"><div><label>Mensaje :</label>{{ personalizado.mensaje }}</div></li>
+						<li style="color:#7F7F7F;display:block;margin-bottom:5px;position:relative;"><div>{{ personalizado.producto.img_producto|safe }}</div></li>
+						<li style="color:#7F7F7F;display:block;margin-bottom:5px;position:relative;"><div><img src="{{ personalizado.foto.imagen.thumbnail|safe }}"/></div></li>
+					</ul>
+				</li>
+				</ul>
+			</div>
+		{% endif %}
+	{% else %}
+		<div>Compra Pendiente</div>	
+	{% endif %}
+{% endblock %}	
